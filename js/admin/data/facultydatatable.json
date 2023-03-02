@@ -1,0 +1,12 @@
+{
+    "aaData": [{
+        "datauid": 1,
+        "name": "Alok Kumar",
+        "designation": "Prof",
+        "email": "alok@desto.co.in",
+        "phone": "917667006355",
+        "office": "HSB",
+        "edit": "<span class='btn btn-sm btn-white editpeople' data-id='12'><i class='fa fa-edit-o'><\/i> Edit<\/span>",
+        "remove": "<span class='btn btn-sm btn-danger deletepeople' data-id='12'><i class='fa fa-trash-o'><\/i> Remove<\/span>"
+    }]
+}

@@ -1,0 +1,49 @@
+<div class="col-sm-12">
+		<h3 style="display:inline">People : </h3>
+		<h5 style="display:inline" class="pull-right">Total : (<?php echo count($getallpeople); ?>)</h5>
+		<?php if(count($getallpeople)): ?>
+		<section class="panel">
+                <table class="table table-striped m-b-none text-sm">
+                  <thead>
+                    <tr>
+                    	<th>#</th>
+                      	<th>Name</th>
+                      	<th>Date</th>    
+                      	<th>User Type</th>                       
+                      	<!--<th>Links</th>-->
+                    </tr>
+                  </thead>
+                  <tbody id="studentlistbyyear">
+	              	<?php $i=1; ?>		                  	
+                  		<?php foreach($getallpeople as $val): ?>
+		                  	<tr>                    
+		                      	<td>
+		                     		<?php echo $i; ?> 
+		                      	</td>
+		                      	<td>
+		                      		<?php echo $val->user_fname; ?> <?php echo $val->user_lname; ?>
+
+		                      	</td>
+		                      	<td>
+		                       		<?php echo $val->created_at; ?>
+
+		                      	</td>
+		                      	<td>
+		                       		<?php echo $val->user_type; ?>
+
+		                      	</td>
+		                      	<!--<td>
+		                      		<a href="#" id="peopleDesc" class="btn btn-xs btn-primary"  data-description="<?php echo $val->news_description; ?>">Details</a>
+		                      	</td>-->
+		                    </tr>
+	                    	<?php $i++ ?>
+                    	<?php endforeach; ?>
+                  </tbody>
+                </table>
+            </section>
+		<?php else: ?>
+		<section class="panel">
+			No result found !
+		</section>
+		<?php endif; ?>
+	</div>

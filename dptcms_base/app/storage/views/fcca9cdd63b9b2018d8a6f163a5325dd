@@ -1,0 +1,48 @@
+<div class="col-sm-12">
+		<h3 style="display:inline">Events : </h3>
+		<h5 style="display:inline" class="pull-right">Total : (<?php echo count($getallevents); ?>)</h5>
+		<?php if(count($getallevents)): ?>
+		<section class="panel">
+                <table class="table table-striped m-b-none text-sm">
+                  <thead>
+                    <tr>
+                    	<th>#</th>
+                      	<th>Titles</th>
+                      	<th>Date</th>                    
+                      	<th>Links</th>
+                    </tr>
+                  </thead>
+                  <tbody id="studentlistbyyear">
+	              	<?php $i=1; ?>		                  	
+                  		<?php foreach($getallevents as $val): ?>
+		                  	<tr>                    
+		                      	<td>
+		                     		<?php echo $i; ?> 
+		                      	</td>
+		                      	<td>
+		                      		<?php echo $val->events_name; ?>
+
+		                      	</td>
+		                      	<td>
+		                       		<?php echo $val->events_date; ?>
+
+		                      	</td>
+		                      	<td>
+		                      		<?php if($val->needpage=0): ?>
+	                          		<a href="<?php echo $val->externallink; ?>" target="_blank">Read more ...</a>
+			                        <?php else: ?>
+			                        <a href="<?php echo url('event/view/'.$val->id); ?>" target="_blank">Read more ...</a>
+			                        <?php endif; ?>
+		                      	</td>
+		                    </tr>
+	                    	<?php $i++ ?>
+                    	<?php endforeach; ?>
+                  </tbody>
+                </table>
+            </section>
+		<?php else: ?>
+		<section class="panel">
+			No result found !
+		</section>
+		<?php endif; ?>
+	</div>

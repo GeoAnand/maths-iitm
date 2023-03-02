@@ -1,0 +1,12 @@
+<h3><?php echo $getcoursedetails->course_no.' '.$getcoursedetails->course_name; ?></h3>
+<br/>
+<h4>Course Details</h4>
+<?php echo $getcoursedetails->course_details; ?>
+
+<br/>
+<h4>Course References:</h4>
+<?php echo $getcoursedetails->courser_reference; ?>
+
+
+
+

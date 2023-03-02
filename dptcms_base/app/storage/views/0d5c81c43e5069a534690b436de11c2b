@@ -1,0 +1,151 @@
+<?php $__env->startSection('header-title'); ?>
+   <title>Admin Panel - <?php echo $eventtype; ?>| DeptCMS</title>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('content'); ?>
+<div class="col-sm-12">
+  <!-- .breadcrumb -->
+  <ul class="breadcrumb">
+    <li><a href="<?php echo url('admin/home'); ?>"><i class="fa fa-home"></i> Home</a></li>
+    <li><a href="<?php echo url('admin/events/dashboard'); ?>"><i class="fa fa-calendar-o"></i> Events</a></li>
+    <li class="active"><?php echo $eventtype; ?></li>
+  </ul>
+  <!-- / .breadcrumb -->
+
+  <section class="panel">
+    
+	<?php if($geteventfortype->count()): ?>
+    	<header class="panel-heading text-right bg-light">
+	        <ul class="nav nav-tabs pull-left" id="programTabs">
+		      	<li class="active"><a href="#upcomingEvents" data-toggle="tab" class="tab-with-btn-sm">Upcoming Events</a></li>		    
+				<li class=""><a href="#pastEvents" data-toggle="tab" class="tab-with-btn-sm">Past Events</a></li>			
+		    </ul>
+		    <span class="nav-link"><a href="<?php echo url('admin/events/createeventcat/'.$eventtypeid); ?>" id="editEventCategory" data-eventcat="<?php echo $eventtypeid; ?>" class="btn btn-sm btn-info "><i class="fa fa-pencil"></i> Edit Event Category</a></span>
+		    
+		    <a href="<?php echo url('admin/events/create'); ?>" data-event="<?php echo $eventtype; ?>" class="btn btn-sm btn-primary create-event-btn"><i class="fa fa-plus"></i> Create an Event</a>
+		</header>
+	<?php else: ?>
+		<header class="panel-heading font-bold"><?php echo $eventtype; ?></header>
+	<?php endif; ?>
+    
+    
+    <div class="panel-body">
+
+    	<div class="tab-content m-t" id="eventsList">
+    		<?php if($geteventfortype->count()): ?>
+	            <div class="tab-pane fade active in" id="upcomingEvents">
+	            <?php $i=0;?>
+	            <?php foreach($geteventfortype as $val): ?>
+	            	<?php if(($val->events_date) >= (date('Y-m-d'))): ?>
+	                <?php $i++;?>
+	                <div class="col-sm-6 each-event" data-id="<?php echo $val->id; ?>">
+	                    <section class="panel bg-light">
+	                        <div class="panel-body lter">
+	                          <a class="pull-right" href="#"><i class="fa fa-calendar"></i> <?php echo $val->events_date; ?> <?php if(($val->events_end_date>$val->events_date)): ?> to <?php echo $val->events_end_date; ?> <?php endif; ?> at <?php echo $val->events_starttime; ?></a>
+	                          <a class="pull-left"><i class="fa fa-calendar fa-2x"></i></a>
+	                          <div class="text-center padder m-t">	                          	
+	                        	<a href="<?php echo url('event/view/'.$val->id); ?>" target="_blank">	                        
+		                            <span class="h4 block">
+		                           		<?php if(strlen($val->events_name)>35): ?> 
+		                            		<?php echo substr($val->events_name,0,35); ?> ...
+		                            	<?php else: ?>
+		                            		<?php echo $val->events_name; ?>
+
+		                            	<?php endif; ?>
+		                            </span>
+		                            <span class="block text-muted">
+		                            	<?php if(strlen($val->events_desc)>70): ?> 
+		                            		<?php echo substr($val->events_desc,0,70); ?> ...
+		                            	<?php else: ?>
+		                            		<?php echo $val->events_desc; ?>
+
+		                            	<?php endif; ?>
+		                            </span>
+		                        </a>
+	                          </div>
+	                        </div>
+	                        <footer class="panel-footer lt">
+	                          <div class="row">
+	                            <div class="col-xs-4">
+	                            <?php 
+									$eventhall=Conferencehall::where('id', '=', $val->events_place)->pluck('conference_halls_name'); 
+								?>
+	                              <small class="text-muted block btn btn-white editevent" data-event="<?php echo $eventtype; ?>" data-eventplace="<?php echo $eventhall; ?>" data-id="<?php echo $val->id; ?>"><i class="fa fa-edit"></i> Edit Event</small>
+	                            </div>
+	                            <div class="col-xs-4 col-xs-offset-4">
+	                              <small class="text-muted block btn btn-danger deleteevent" data-id="<?php echo $val->id; ?>"><i class="fa fa-trash-o"></i> Delete Event</small>
+	                            </div>                            
+	                          </div>
+	                        </footer>
+	                    </section>
+	                </div>
+	                <?php endif; ?>
+	            <?php endforeach; ?> 
+	            <?php if($i==0): ?>
+	            	<span>There are no upcoming events ..</span>
+	            <?php endif; ?>
+	            </div>
+	            <div class="tab-pane fade " id="pastEvents">
+	            <?php foreach($geteventfortype as $val): ?>
+	            	<?php if(date($val->events_date) < (date('Y-m-d'))): ?>
+	                <div class="col-sm-6 each-event" data-id="<?php echo $val->id; ?>">
+	                    <section class="panel bg-light">
+	                        <div class="panel-body lter">
+	                          <a class="pull-right" href="#"><i class="fa fa-calendar"></i> 
+<?php echo date("d-m-Y", strtotime($val->events_date))?>   <?php if(($val->events_end_date>$val->events_date)): ?> to <!-- to EDITED NARAYANAN--> <?php echo date("d-m-Y", strtotime($val->events_end_date))?>  <?php endif; ?> </a>
+	                          <a class="pull-left"><i class="fa fa-calendar fa-2x"></i></a>
+	                          <div class="text-center padder m-t">
+	                          	<a href="<?php echo url('event/view/'.$val->id); ?>" target="_blank">
+		                            <span class="h4 block">
+		                            	<?php if(strlen($val->events_name)>35): ?> 
+		                            		<?php echo substr($val->events_name,0,35); ?> ...
+		                            	<?php else: ?>
+		                            		<?php echo $val->events_name; ?>
+
+		                            	<?php endif; ?>
+		                            </span>
+		                            <span class="block text-muted"> 
+		                            	<?php if(strlen($val->events_desc)>70): ?> 
+		                            		<?php echo substr($val->events_desc,0,70); ?> ...
+		                            	<?php else: ?>
+		                            		<?php echo $val->events_desc; ?>
+
+		                            	<?php endif; ?>
+		                            </span>
+		                        </a>
+	                          </div>
+	                        </div>
+	                        <footer class="panel-footer lt">
+	                          <div class="row">
+	                            <div class="col-xs-4">
+	                            <?php 
+									$eventhall=Conferencehall::where('id', '=', $val->events_place)->pluck('conference_halls_name'); 
+								?>
+	                              <small class="text-muted block btn btn-white editevent" data-event="<?php echo $eventtype; ?>" data-eventplace="<?php echo $eventhall; ?>" data-id="<?php echo $val->id; ?>"><i class="fa fa-edit"></i> Edit Event</small>
+	                            </div>
+	                            <div class="col-xs-4 col-xs-offset-4">
+	                              <small class="text-muted block btn btn-danger deleteevent" data-id="<?php echo $val->id; ?>"><i class="fa fa-trash-o"></i> Delete Event</small>
+	                            </div>                            
+	                          </div>
+	                        </footer>
+	                    </section>
+	                </div>
+	                <?php endif; ?>
+	            <?php endforeach; ?> 
+	            </div>
+	        <?php else: ?>
+	        	<div class="text-center">
+		        	<span class="text-muted h5 block"> Sorry! we could no find any events!</span>
+		        	<a href="<?php echo url('admin/events/create'); ?>" data-event="<?php echo $eventtype; ?>" class="btn btn-lg btn-info create-event-btn"><i class="fa fa-calendar fa-1x"></i> Create a Event Now!</a>
+		        	<br><br>
+
+		        	<button id="deleteEventCategory" data-eventcat="<?php echo $eventtypeid; ?>" class="btn btn-sm btn-danger "><i class="fa fa-trash-o"></i> Delete Event Category</button>
+		        </div>
+	        <?php endif; ?>
+        </div>
+	</div>
+	</section>
+</div>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('admin.layouts.main', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

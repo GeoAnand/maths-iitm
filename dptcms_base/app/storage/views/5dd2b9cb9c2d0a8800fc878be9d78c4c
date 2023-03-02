@@ -1,0 +1,290 @@
+<ul class="nav">
+<?php if(Auth::user()->isadmin==1): ?>
+  <li class="nav-link">
+    <a href="<?php echo url('admin/report'); ?>">
+      <i class="fa fa-bar-chart-o"></i>
+      <span>Report</span>
+    </a>
+  </li>
+
+  <li class="nav-link">
+    <a href="<?php echo url('admin/home'); ?>">                            
+      <i class="fa fa-home"></i>
+      <span>Home</span>
+    </a>
+  </li>
+  <?php endif; ?>
+  <?php if((Auth::user()->isadmin==1)&&(Auth::user()->userprivileg->people==1 || Auth::user()->issuper==1)): ?>
+  <li>
+    <a href="#" class="dropdown-toggle">
+      <span class="pull-right auto">
+        <i class="fa fa-angle-down text"></i>
+        <i class="fa fa-angle-up text-active"></i>
+      </span>
+      <i class="fa fa-user"></i>
+      <span>People</span>
+    </a>
+    <ul class="nav none dker">
+      <?php 
+        $getusertype=Usertype::all();
+      ?>
+      <?php foreach($getusertype as $val): ?>
+      <li class="nav-link">
+        <a href="<?php echo url('admin/people/'.$val->link); ?>"><?php echo $val->user_type_name; ?></a>
+      </li>
+      <?php endforeach; ?>
+      <li class="nav-link">
+        <a href="<?php echo url('admin/user/create'); ?>">+ Add People</a>
+      </li>
+      <!-- <li class="nav-link">
+        <a href="<?php echo url('admin/usertype/create'); ?>">+ Add Category</a>
+      </li> -->
+      <!--
+      <li class="nav-link">
+        <a href="<?php echo url('admin/people/staff'); ?>">Staff</a>
+      </li> -->
+
+    </ul>
+  </li>
+  <?php endif; ?>
+  <?php if((Auth::user()->isadmin==1)&&(Auth::user()->userprivileg->student==1 || Auth::user()->issuper==1)): ?>
+  <li>
+    <a href="#" class="dropdown-toggle">
+      <span class="pull-right auto">
+        <i class="fa fa-angle-down text"></i>
+        <i class="fa fa-angle-up text-active"></i>
+      </span>
+      <i class="fa fa-male"></i>
+      <span>Students</span>
+    </a>
+          
+    <ul class="nav none dker" id="studentprogramslist">
+      <?php 
+        $getallstudprog=Programs::where('disable_students', '=', 0)->get();
+      ?>
+      <?php foreach($getallstudprog as $val): ?>
+        <li class="nav-link">
+          <a href="<?php echo url('admin/student/showstudents/'.$val->id); ?>"><?php echo $val->program_name; ?></a>
+        </li>
+      <?php endforeach; ?>
+      <li class="nav-link">
+        <a href="<?php echo url('admin/student/addstudent'); ?>">+ Add Student(s)</a>
+      </li>
+    </ul>    
+  </li>
+  <?php endif; ?>
+  <?php if((Auth::user()->isadmin==1)&&(Auth::user()->userprivileg->research==1 || Auth::user()->issuper==1)): ?>
+  <li>
+    <a href="#" class="dropdown-toggle">
+      <span class="pull-right auto">
+        <i class="fa fa-angle-down text"></i>
+        <i class="fa fa-angle-up text-active"></i>
+      </span>                           
+      <i class="fa fa-book"></i>
+      <span>Research</span>
+    </a>
+    <ul class="nav none dker">                
+      <li class="nav-link">
+        <a href="<?php echo url('admin/research/researcharea'); ?>" id="researchAreaLink">Research Area</a>
+      </li>
+      <li class="nav-link">
+        <a href="<?php echo url('admin/research/researchgroups'); ?>" id="researchGroupLink">Research Groups</a>
+      </li>
+      <li class="nav-link">
+        <a href="<?php echo url('admin/research/recentpublications'); ?>">Recent Publications</a>
+      </li>                                          
+    </ul>
+  </li>
+  <li>
+    <a href="#" class="dropdown-toggle">
+      <span class="pull-right auto">
+        <i class="fa fa-angle-down text"></i>
+        <i class="fa fa-angle-up text-active"></i>
+      </span>                           
+      <i class="fa fa-book"></i>
+      <span>Publications</span>
+    </a>
+    <ul class="nav none dker">                
+      <li class="nav-link">
+        <a href="<?php echo url('admin/publications/managepublications'); ?>">Publications</a>
+      </li>
+      <li class="nav-link">
+        <a href="<?php echo url('admin/publications/addpublications'); ?>">+ Add Publlications</a>
+      </li>                                         
+    </ul>
+  </li>
+  <?php endif; ?>
+  <?php if((Auth::user()->isadmin==1)&&(Auth::user()->userprivileg->programs==1 || Auth::user()->issuper==1)): ?>
+  <li>
+    <a href="#" class="dropdown-toggle">
+      <span class="pull-right auto">
+        <i class="fa fa-angle-down text"></i>
+        <i class="fa fa-angle-up text-active"></i>
+      </span>
+      <i class="fa fa-bars"></i>
+      <span>Programs</span>
+    </a>
+    <ul class="nav none dker" id="programslist">
+      <?php 
+        $getallprog=Programs::all();
+      ?>
+      <?php foreach($getallprog as $val): ?>
+        <li class="nav-link">
+          <a href="<?php echo url('admin/programs/showprogramdetails/'.$val->id); ?>"><?php echo $val->program_name; ?></a>
+        </li>
+      <?php endforeach; ?>
+
+      <li class="nav-link">
+        <a href="<?php echo url('admin/programs/addprogram'); ?>">+ Add Program</a>
+      </li>
+    </ul>
+
+  </li>
+  <li class="nav-link">
+    <a href="<?php echo url('admin/othercourses/manage'); ?>">
+      <i class="fa fa-book"></i>
+      <span>Other Courses</span>
+    </a>
+  </li>
+  <?php endif; ?>
+  <?php if((Auth::user()->isadmin==1)&&(Auth::user()->userprivileg->events==1 || Auth::user()->issuper==1)): ?>
+  <li>
+    <a href="#">
+      <span class="pull-right auto">
+        <i class="fa fa-angle-down text"></i>
+        <i class="fa fa-angle-up text-active"></i>
+      </span>
+      <i class="fa fa-calendar"></i>
+      <span>Events</span>
+    </a>
+    <ul class="nav none dker" id="eventslist">
+      <?php $getallevents=Eventcategory::orderBy('updated_at','DESC')->get(); ?> 
+      <?php foreach($getallevents as $val): ?>
+        <li class="nav-link">
+          <a href="<?php echo url('admin/events/details/'.$val->id); ?>"><?php echo $val->events_type_name; ?></a>
+        </li>
+      <?php endforeach; ?>     
+
+      <li class="nav-link">
+        <a href="<?php echo url('admin/events/create'); ?>">+ Add Event</a>
+      </li>
+
+      <li class="nav-link">
+        <a href="<?php echo url('admin/events/createeventcat'); ?>">+ Add Event Category</a>
+      </li>
+
+      <!-- <li class="nav-link">
+        <a href="<?php echo url('admin/events/meetings'); ?>">Meetings</a>
+      </li>
+      <li class="nav-link">
+        <a href="<?php echo url('admin/events/seminars'); ?>">Seminars</a>
+      </li> -->
+
+    </ul>
+  </li>
+  <?php endif; ?>
+<?php if((Auth::user()->isadmin==1)&&(Auth::user()->userprivileg->resources==1 || Auth::user()->issuper==1)): ?>
+
+  <li>
+    <a href="#" class="dropdown-toggle">
+      <span class="pull-right auto">
+        <i class="fa fa-angle-down text"></i>
+        <i class="fa fa-angle-up text-active"></i>
+      </span>                            
+      <i class="fa fa-folder text"></i>
+      <i class="fa fa-folder-open text-active"></i>
+      <span>Resource</span>
+    </a>
+    <ul class="nav none dker">                
+      <li class="nav-link">
+        <a href="<?php echo url('admin/resources/links'); ?>">Links</a>
+      </li>
+      <li class="nav-link">
+        <a href="<?php echo url('admin/resources/docs'); ?>">Documents</a>
+      </li>
+      <li class="nav-link" id="gotoGallery">
+        <a href="<?php echo url('admin/resources/managegallery'); ?>">Gallery</a>
+      </li>      
+      <li class="nav-link">
+        <a href="<?php echo url('admin/resources/videos'); ?>">Videos</a>
+      </li>
+      <li class="nav-link">
+        <a href="<?php echo url('admin/resources/conferencehalls'); ?>">Conference Halls</a>
+      </li>
+      <!-- <li class="nav-link">
+        <a href="<?php echo url('admin/resource/department-brochure'); ?>">Department Brochure</a>
+      </li>
+      <li class="nav-link">
+        <a href="<?php echo url('admin/resource/useful-informations'); ?>">Useful Information</a>
+      </li>
+      <li class="nav-link">
+        <a href="<?php echo url('admin/resource/gallery'); ?>">Gallery</a>
+      </li> -->
+    </ul>
+  </li>
+  <li class="nav-link">
+    <a href="<?php echo url('admin/slider/viewall'); ?>">
+      <i class="fa fa-envelope-o"></i>
+      <span>Slider</span>
+    </a>
+  </li>
+  <?php endif; ?>
+  
+  <!-- <li>
+    <a href="#" class="dropdown-toggle">
+      <span class="pull-right auto">
+        <i class="fa fa-angle-down text"></i>
+        <i class="fa fa-angle-up text-active"></i>
+      </span>                            
+      <i class="fa fa-folder text"></i>
+      <i class="fa fa-folder-open text-active"></i>
+      <span>Booking Management</span>
+    </a>
+    <ul class="nav none dker">                
+      <li class="nav-link">
+        <a href="<?php /* <?php echo url('admin/booking/pendingbooking'); ?> */ ?>">Pending Request</a>
+      </li>
+      <li class="nav-link">
+        <a href="<?php /* <?php echo url('admin/booking/bookinghistory'); ?> */ ?>">Booking History</a>
+      </li>
+    </ul>    
+  </li> -->
+  <?php if((Auth::user()->isadmin==1)&&(Auth::user()->userprivileg->bookings==1 || Auth::user()->issuper==1)): ?>
+  <li class="nav-link">
+    <a href="<?php echo url('admin/booking/bookings'); ?>">
+      <i class="fa fa-calendar"></i>
+       Bookings
+    </a>
+  </li>
+  <?php endif; ?>
+  <?php if((Auth::user()->isadmin==1)&&(Auth::user()->userprivileg->newannouncement==1 || Auth::user()->issuper==1)): ?>
+  <li class="nav-link">
+    <a href="<?php echo url('admin/news/shownews'); ?>">
+      <i class="fa fa-bullhorn"></i>
+      <span>News / Announcements</span>
+    </a>
+  </li>
+  <?php endif; ?>
+  <?php if((Auth::user()->isadmin==1)&&(Auth::user()->userprivileg->resources==1 || Auth::user()->issuper==1)): ?>
+  <li class="nav-link">
+    <a href="<?php echo url('admin/contact/contactdetails'); ?>">
+      <i class="fa fa-envelope-o"></i>
+      <span>Contact Info</span>
+    </a>
+  </li>
+  <?php endif; ?>
+  <?php if((Auth::user()->isadmin==1)&&(Auth::user()->userprivileg->createadmin==1 || Auth::user()->issuper==1)): ?>
+  <li class="nav-link">
+    <a href="<?php echo url('admin/changepermission'); ?>">
+      <i class="fa fa-gear"></i>
+      <span>User privileges</span>
+    </a>
+  </li>
+  <?php endif; ?>
+  <!-- <li class="nav-link">
+    <a href="<?php echo url('admin/settings'); ?>">
+      <i class="fa fa-gear"></i>
+      <span>Settings</span>
+    </a>
+  </li> -->
+</ul>

@@ -1,0 +1,44 @@
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews
+    </IfModule>
+
+    RewriteEngine On
+  # Redirect www to non-www first 
+  # Added based on article http://stackoverflow.com/questions/234723/generic-htaccess-redirect-www-to-non-www
+  RewriteCond %{HTTP_HOST} ^www\.(.+) [NC]
+  RewriteRule ^(.*) http://%1/$1 [R=301,NE,L]
+
+  # Then redirect http to https (if necessary)
+  #RewriteCond %{HTTPS} !=on
+  #RewriteRule ^/?(.*) https://%{SERVER_NAME}/$1 [R=301,L]
+#RewriteCond %{HTTPS} off
+#RewriteCond %{ENV:HTTPS} off
+#RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301,NE]
+
+#RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+#RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301,NE]
+#RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+#RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
+
+    # Redirect Trailing Slashes...
+    RewriteRule ^(.*)/$ /$1 [L,R=301]
+
+    # Handle Front Controller...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
+#RewriteBase /mathdept
+RewriteBase /test
+
+#php_flag engine off
+
+#RewriteCond %{HTTPS_HOST}  ^www\.physics\.iitm\.ac\.in [NC]
+#RewriteRule ^(.*) https://physics.iitm.ac.in/$1 [L,R=301]
+#RewriteBase /
+</IfModule>
+
+php_flag xcache.cacher Off
+php_flag xcache.size 0
+php_flag xcache.stat Off
+

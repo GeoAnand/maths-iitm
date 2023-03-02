@@ -1,0 +1,47 @@
+<?php $__env->startSection('header-title'); ?>
+   <title>Admin Panel | DeptCMS</title>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('content'); ?>
+   <div class="col-sm-12">
+     <!-- .breadcrumb -->
+      <ul class="breadcrumb">
+        <li><a href="<?php echo url('admin/home'); ?>" class="link"><i class="fa fa-home"></i> Home</a></li>
+        <li class="active"> Student</li>
+      </ul>
+     <!-- / .breadcrumb -->
+    <section class="panel">    
+    <header class="panel-heading font-bold">
+        Programs
+    </header>
+    
+    <div class="panel-body">
+      <div class="col-sm-12">
+      <?php 
+        $getallprog=Programs::all();
+      ?>
+	    <?php foreach($getallprog as $val): ?>
+		    <div class="col-sm-4 linked-card" data-href="<?php echo url('admin/programs/showprogramdetails/'.$val->id); ?>">
+            <section class="panel bg-light">
+                <div class="panel-body lter">
+                  <div class="text-center padder m-t">	                          	
+                	<a href="<?php echo url('admin/programs/showprogramdetails/'.$val->id); ?>">	                        
+                        <span class="h4 block">
+                       		<i class="fa fa-user"></i> <?php echo $val->program_name; ?>
+
+                        </span>
+                    </a>
+                  </div>
+                </div>
+            </section>
+        </div>
+	    <?php endforeach; ?>
+      </div>
+    </div>
+  </section>
+</div>
+<script type="text/javascript">
+
+  </script>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('admin.layouts.main', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

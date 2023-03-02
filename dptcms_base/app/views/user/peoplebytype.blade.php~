@@ -1,0 +1,69 @@
+@extends('layout.main')
+
+@section('header-title')
+    <title>Department of Mathematics | Indian Institute Of Technology Madras , Chennai</title>
+@stop
+
+@section('content')
+	<!-- <h3 id="researchgruopStart"></h3> -->
+	
+	<div class="col-sm-12">
+		<div class="col-sm-8">
+			<h3 class="dpt-text-dark">{{implode(' ',array_filter(explode('-',$type)))}}</h3>
+		</div>
+		<div class="col-sm-4">
+			<ol class="breadcrumb pull-right">
+			  <li><a href="#">People</a></li>
+			  <li class="active">{{implode(' ',array_filter(explode('-',$type)))}}</li>
+			</ol>
+		</div>
+	</div>
+	<div class="col-sm-12 line line-solid"></div>
+
+
+    @if(count($peoplebytype))
+    	<div class="col-sm-12" align="center" style="padding: 10px 0px 30px 0px;">
+    		<form class="form-inline" role="form" action="javascript:void(0)">
+    			<div class="form-group has-feedback">
+    				<input type="text" class="form-control" id="searchpeople" placeholder="Search People" style="border-color: #C5B7B7;">
+    				<span class="fa fa-search form-control-feedback"></span>
+    			</div>
+    		</form>
+    	</div>
+
+        <div class="colsm-12">
+        	@foreach($peoplebytype as $value)
+                <div class="col-sm-4 each-user" data-href="{{url($value->user_namehandle)}}">
+                    <section class="panel dpt-bg-light">
+                        <div class="panel-body lter">
+                            <div class="col-sm-3 m-l-n">
+                                <a href="#" class="pull-left thumb avatar border m-r">
+                                    @if($value->user_profilepics)
+                                        <img src="{{URL::asset('images/'.$value->user_profilepics)}}" class="img-circle">
+                                    @else
+                                        <img src="{{URL::asset('images/avatar_default.jpg')}}" class="img-circle">
+                                    @endif
+                                </a>
+                            </div>
+                            <div class="col-sm-9">
+                                <div class="m-l  m-r-n">                                  
+                                    <p class="each-user-title font-bold" data-name="{{$value->user_fname.' '.$value->user_lname}}">{{$value->user_title.' '.$value->user_fname.' '.$value->user_lname}}</p>
+                                    <p class="">{{$value->user_designation}}</p>
+                                </div> 
+                                <div class="m-l  m-r-n">  
+                                    <p><i class="fa fa-phone"></i>&nbsp;&nbsp;{{'044 - 2257 '.$value->user_phone}}</p>
+                                    <p><i class="fa fa-map-marker"></i>&nbsp;&nbsp;Office : {{$value->user_office}}</p>
+                                    <p style="word-break: break-word;"><i class="fa fa-envelope-o"></i>&nbsp;&nbsp;{{$value->user_email}}</p>                             
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+        	@endforeach
+        </div>
+    @else
+        <span class="text-muted wrapper text-center center-block">
+            <i class="fa fa-warning fa-4x"></i> <br/>Sorry! Currently there are no {{implode(' ',array_filter(explode('-',$type)))}} or the list has not been updated.
+        </span>
+    @endif
+@stop

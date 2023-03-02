@@ -1,0 +1,113 @@
+@extends('admin.layouts.main')
+
+@section('header-title')
+    <title>Admin Panel | DeptCMS</title>
+@stop
+
+@section('content')
+<style type="text/css">
+	#sliderimagelist td{
+		vertical-align: middle;
+		font-weight: bold;
+	}
+	.sligeimg{
+		min-width: 100px;
+		height: 100px;
+	}
+</style>
+
+<div class="col-sm-12">
+  <!-- .breadcrumb -->
+  <ul class="breadcrumb">
+    <li><a href="{{url('admin/home')}}"><i class="fa fa-home"></i> Home</a></li>
+    <li><a href="#"><i class="fa fa-picture-o"></i> Slider</a></li>
+    <li class="active"> All slider image</li>
+  </ul>
+  <!-- / .breadcrumb -->
+
+  <section class="panel">    
+    <header class="panel-heading font-bold">
+        Slider : All slider list
+    </header>
+    
+    <div class="panel-body">
+		<section class="panel">
+	        <header class="panel-heading" style="border-color:transparent;">
+				<button class="pull-right btn btn-info btn-xs" data-toggle="modal" data-target="#UploadImgForSlider" style="margin: 10px;">
+				<i class="fa fa-plus"></i> Add a new image</button>	        
+			</header>	        
+	        <div class="table-responsive">
+	          <table class="table table-striped b-t text-sm">
+	            <thead>
+	              <tr>
+	                <th class="th-sortable" data-toggle="class">Image Text</th>
+	                <th>Image</th>
+	                <th>Order</th>
+	                <th width="">Delete</th>
+	              </tr>
+	            </thead>
+	            <tbody id="sliderimagelist">
+	            @if(count($getallpicsforslider))
+	             	@foreach($getallpicsforslider as $slide)
+		              <tr>
+		                <td class="slidetext">{{$slide->slider_text}}</td>
+		                <td><img class="sligeimg" src="{{URL::asset('siteimages/slider/'.$slide->slider_image_name)}}"/></td>
+		                <td class="slidetext">{{$slide->slider_order}}</td>
+		                <td>
+		                  <a href="#" class="btn btn-xs btn-danger deletesliderimg" data-id="{{$slide->id}}"><i class="fa fa-trash-o"></i> Delete</a>
+		                </td>
+		              </tr>
+	              	@endforeach
+	            @else
+	            	<tr>
+		                <td colspan="5">No Image uploaded ..</td>
+		            </tr>
+	            @endif
+
+	            </tbody>
+	          </table>
+	        </div>	        
+	    </section>
+	</div>
+</section>
+
+</div>
+@stop
+
+@section('page-modals')
+<!-- File Upload Modal -->
+<div class="modal fade" id="UploadImgForSlider" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      	<div class="modal-header">
+        	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        	<h4 class="modal-title" id="myModalLabel">Upload a new image</h4>
+      	</div>
+      	<div class="modal-body" style="min-height: 270px;">
+	        <form role="form" id="uploadSlideimage1" method="post" enctype="multipart/form-data" action="{{url('admin/slider/uploadimage/0')}}">
+				<div class="form-group">
+				    <label for="exampleInputEmail1">Image Text</label>
+				    <input type="text" class="form-control" id="" placeholder="Enter a text for this image" name="imgtext">
+				</div>		  
+				<div class="form-group">
+				    <label for="exampleInputFile">File input</label>
+				    <input type="file" id="file" name="slideimage">	
+				    <em class="">File Size : 100KB &amp; Dimension : 1520x600 for best quality</em>	    
+				</div>
+				<div class="form-group">
+				    <label for="exampleInputPassword1">Order</label>
+				    <input type="text" class="form-control" name="sliderorder" placeholder="Give an Order i.e. 1 or 2 ">
+					    <!-- <select class="form-control" name="sliderorder">
+							<option values="1">1</option>
+							<option values="2">2</option>
+							<option values="3">3</option>
+						</select> -->
+				</div>
+				<button type="reset" style="display:none"></button>
+				<button type="submit" class="btn btn-default pull-right">Submit</button>
+			</form>
+      	</div>
+    </div>
+  </div>
+</div>
+@stop

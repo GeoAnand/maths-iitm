@@ -1,0 +1,173 @@
+<?php $__env->startSection('header-title'); ?>
+    <title>Department of Mathematics | Indian Institute Of Technology Madras , Chennai</title>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('content'); ?>
+<link rel="stylesheet" href="<?php echo URL::asset('css/blueimp-gallery.min.css'); ?>">
+<link rel="stylesheet" href="<?php echo URL::asset('css/bootstrap-image-gallery.min.css'); ?>">
+<style type="text/css">
+    .thumb{
+        width: 100%;
+    }
+    .thumbnail
+    {
+        margin-bottom:0px;
+    }
+    .thumbnail img
+    {
+        height: 100px;
+    }
+    .deleteimage
+    {
+        display: none;
+    }
+    .eachimage:hover .deleteimage
+    {
+        display: inline;
+    }
+</style>
+
+<div class="col-sm-12">
+  <!-- .breadcrumb -->
+  <ul class="breadcrumb">
+    <li><a href="<?php echo url('admin/home'); ?>"><i class="fa fa-home"></i> Home</a></li>
+    <li><a href="<?php echo url('admin/resources/dashboard'); ?>"><i class="fa fa-bars"></i> Resources</a></li>
+    <li class="active"> Gallery</li>
+  </ul>
+  <!-- / .breadcrumb -->
+
+  <section class="panel">    
+    <header class="panel-heading font-bold">
+        Resources : Gallery
+        <button class="pull-right m-l btn btn-info btn-xs" data-toggle="modal" data-target="#uploadModal"><i class="fa fa-upload"></i> Upload</button>
+        <button class="pull-right btn btn-primary btn-xs" data-toggle="modal" data-target="#createModal"><i class="fa fa-plus"></i> Create Album</button>
+    </header>
+    
+    <div class="panel-body">
+        <div class="col-sm-12" style="margin:10px">
+            <?php if(count($getalbums)): ?>
+            <div id="albumlist">
+                <h4>Album List</h4>
+                <?php for($i=0;$i<=count($getalbums)-1;$i++): ?>
+                    <div class="col-sm-4 linked-card" data-href="<?php echo url('admin/resources/managealbum/'.$getalbums[$i]['id']); ?>">
+                        <section class="panel bg-light">
+                            <div class="panel-body lter">
+                              <div class="text-center padder m-t">                              
+                                <a href="<?php echo url('admin/resources/managealbum/'.$getalbums[$i]['id']); ?>">                          
+                                    <span class="h4 block">
+                                        <i class="fa fa-picture-o"></i> <?php echo $getalbums[$i]['resource_album_name']; ?>
+
+                                    </span>
+                                </a>
+                              </div>
+                            </div>
+                        </section>
+                    </div>
+                <?php endfor; ?>
+            </div>
+            <?php else: ?>
+                Sorry! You do not have any Album. Please create an album to continue
+            <?php endif; ?>
+        </div>
+    </div>
+</section>
+</div>
+
+<div id="blueimp-gallery" class="blueimp-gallery">
+    <!-- The container for the modal slides -->
+    <div class="slides"></div>
+    <!-- Controls for the borderless lightbox -->
+    <h3 class="title"></h3>
+    <a class="prev">â€¹</a>
+    <a class="next">â€º</a>
+    <a class="close">Ã—</a>
+    <a class="play-pause"></a>
+    <ol class="indicator"></ol>
+    <!-- The modal dialog, which will be used to wrap the lightbox content -->
+    <div class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body next"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left prev">
+                        <i class="glyphicon glyphicon-chevron-left"></i>
+                        Previous
+                    </button>
+                    <button type="button" class="btn btn-primary next">
+                        Next
+                        <i class="glyphicon glyphicon-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('page-modals'); ?>
+<!-- Modal -->
+<div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Upload Image/Video to Album</h4>
+      </div>
+      <div class="modal-body">
+            <form role="form" class="postUploadform" action="<?php echo url('resources/uploadtogallery/0'); ?>" method="post" enctype="multipart/form-data">
+              <div class="form-group">
+                <label for="album">Album </label>
+                <?php /* <input class="form-control" type="text" id="imageTitle" name="imageTitle"> */ ?>
+                <select class="form-control" name="album" required>
+                    <option value="">-- Select an Album --</option>
+                    <?php foreach($getalbums as $val): ?>
+                        <option value="<?php echo $val->id; ?>"><?php echo $val->resource_album_name; ?></option>
+                    <?php endforeach; ?>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="fileuploadtogallery">Select Files </label>
+                <input type="file" id="fileuploadtogallery" name="uploadfiles[]" multiple="true" required>
+                <p class="help-block">(Select multiple files and click upload)</p>
+              </div>
+              <div class="form-group">
+                  <button type="submit" class="btn btn-primary" id="uploadAlbum"> Upload Album</button>
+              </div>
+            </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Create an Album</h4>
+      </div>
+      <div class="modal-body">
+        <form role="form" id="createAlbumform" method="post" action="<?php echo url('resources/album/0'); ?>" enctype="multipart/form-data">
+
+          <div class="form-group">
+            <label for="albumname">Album Name</label>
+            <input type="text" class="form-control" name="albumname">
+          </div>
+
+          <button type="submit" class="btn btn-primary" id="createAlbum">Create Album</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('footer-scripts'); ?>
+<script src="<?php echo URL::asset('js/jquery.blueimp-gallery.min.js'); ?>"></script>
+<script src="<?php echo URL::asset('js/bootstrap-image-gallery.min.js'); ?>"></script>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('admin.layouts.main', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

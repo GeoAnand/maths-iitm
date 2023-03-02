@@ -1,0 +1,132 @@
+/* BOOTSTRAP 3.x GLOBAL STYLES
+-------------------------------------------------- */
+body {
+  padding-bottom: 0;
+  color: #5a5a5a;
+  background: #FFFFFF;
+}
+
+#navbarContainer{
+	border-top: 1px solid;
+	border-bottom: 1px solid;
+	border-color: #bbb;
+}
+
+#deptHeading{
+	margin-bottom: 0;
+	font-size: 35px;
+	text-shadow: 1px 1px 1px #781f19;
+	color:#d6a64f;
+}
+
+#deptTagline{
+  font-size: 14px;
+  /*color : #781f19;*/
+}
+
+.line{
+	border-top-color:#bbb;
+}
+.panel{
+	border-left:0;
+	border-right:0;
+	border-color:#bbb;
+}
+.panel .panel-heading{
+	border-color:#bbb;
+}
+
+.list-group-item{
+	border-color:#bbb;
+}
+.list-group-item:last-child {
+	margin-bottom: 0;
+	border-bottom-right-radius: 0; 
+	border-bottom-left-radius: 0; 
+}
+.list-group-item:first-child {
+	border-top-right-radius: 0; 
+	border-top-left-radius: 0 
+}
+
+/* Content Container*/
+#contentContainer{
+  border: 0;
+  background:#fff;
+  min-height:400px;
+  padding-bottom: 30px;
+}
+/*-------*/
+
+/* Custom colors for CMS */
+.dpt-text-light{
+ color: #fff; 
+}
+.dpt-text-dark{
+  color: #781f19;
+}
+.dpt-bg-light{
+	background-color: #d6a64f;
+	color: #781f19;
+}
+.dpt-bg-dark{
+	background-color: #781f19;
+	color: #fff;
+}
+.dpt-bg-light a {
+color: #781f19;
+}
+.dpt-alert {
+  color: #b08029;
+  background-color: #f0debe;
+  border-color: #e5c68f;
+}
+/* ------*/
+a.list-group-item {
+color: #781f19;
+}
+/* Dropdown List */
+.dropdown-menu > li > a:hover, 
+.dropdown-menu > li > a:focus, 
+.dropdown-menu > .active > a, 
+.dropdown-menu > .active > a:hover, 
+.dropdown-menu > .active > a:focus {
+background-image: none;
+filter: none;
+background-color: #781f19;
+color: #fff;
+}
+/* ------*/
+/* Nav Tabs */
+.nav-tabs {
+border-bottom: 1px solid #781f19;
+}
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
+color: #781f19;
+background-color: #fff;
+border: 1px solid #781f19;
+border-bottom-color: transparent;
+cursor: default;
+}
+.nav-tabs>li>a:hover {
+border-color: #e5c68f #e5c68f #b08029;
+}
+.nav>li>a:hover, .nav>li>a:focus {
+text-decoration: none;
+background-color: #f0debe;
+color:#b08029;
+}
+/* --------------- */
+a {
+color: #781f19;
+text-decoration: none;
+}
+.announcement a{
+	color: #575757;
+}
+.list-group-item a{
+  color:#575757;
+}
+#newsSection{
+	margin-top: 15px;
+}

@@ -1,0 +1,115 @@
+<?php $__env->startSection('header-title'); ?>
+    <title>Department of Mathematics | Indian Institute Of Technology Madras , Chennai</title>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('content-heading'); ?>
+Research Group
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('content'); ?>	
+  
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="col-sm-8">
+        <h3 class="dpt-text-dark">Research Group</h3>
+      </div>
+      <div class="col-sm-4">
+        <ol class="breadcrumb pull-right">
+          <li><a href="#">Research</a></li>
+          <li class="active">Research Group</li>
+        </ol>
+      </div>
+      <div class="col-sm-12 line line-solid"></div>
+    </div>      
+  </div>
+    <?php //var_dump($getresearchgroup); ?>
+  <div class="wrapper">
+    <section class="panel">
+      <div class="panel-body">
+        <div class="col-md-12">
+            <h3 class="font-bold m-b"><?php echo $getresearchgroup->researchgroup_name; ?></h3>
+            <p>
+            	<?php echo $getresearchgroup->researchgroup_desc; ?>
+
+            </p>
+            <h4>Members</h4>
+            <p>
+            	<?php if($members!=''): ?>
+            		<?php foreach($members as $member): ?>
+            			<label class="label dpt-bg-dark" style="display: inline-block; font-size: 12px; color: #fff;  padding: 6px 8px; cursor: pointer margin: 2px; ">
+            			<?php echo $member['fname']; ?> <?php echo $member['lname']; ?>
+
+            			</label>
+            		<?php endforeach; ?>
+            	<?php else: ?>
+            		None
+            	<?php endif; ?>
+            </p>
+            <h4>Publications</h4>
+            <p>
+        		<?php if(count($publications)): ?>
+					<div class="col-sm-12 m-t-lg">
+						<div class="col-sm-12 line line-solid"></div>
+
+						<section class="panel">
+				            <table class="table table-striped m-b-none text-sm pull-left">
+				              <thead>
+				                <tr class="dpt-text-dark">
+				                	<th>#</th>
+				                  	<th>Title</th>
+				                  	<th>Authors</th>                    
+				                  	<th>Journal</th>
+				                  	<th>Year</th>
+				                </tr>
+				              </thead>
+				              
+				              <tbody id="studentlistbyyear"> 
+				              	<?php $current_page_number=$publications->getCurrentPage(); $items_per_page=$publications->getPerPage(); ?>
+				              	<?php $count = (($current_page_number - 1) * $items_per_page) + 1; ?>      	
+				              		<?php foreach($publications as $val): ?>
+					                  	<tr>                    
+					                      	<td>
+					                     		<?php echo $count; ?> 
+					                      	</td>
+					                      	<td>
+					                      		<?php echo $val->title; ?>
+
+					                      	</td>
+					                      	<td>
+					                       		<?php echo $val->author; ?>
+
+					                      	</td>
+					                      	<td>
+					                      		<?php echo $val->journal; ?>
+
+					                      		<p><?php if($val->volume): ?> Volume: <span class="pub-volume"><?php echo $val->volume; ?> <?php endif; ?> <?php if($val->pages): ?></span> Page: <span class="pub-page"><?php echo $val->pages; ?></span><?php endif; ?> <?php if($val->doi): ?>  <span class="pub-doi"><a href="http://dx.doi.org/<?php echo $val->doi; ?>">DOI:<?php echo $val->doi; ?> </a></span><?php endif; ?>				
+					                      	</td>
+					                      	<td>
+					                       		<?php echo $val->year; ?>
+
+					                      	</td>
+					                    </tr>
+				                    	<?php $count++ ?>
+				                	<?php endforeach; ?>  
+				              </tbody>						              
+				            </table>
+				            <div class="col-sm-12 text-center" id="publicationsPaginate">                
+						      <?php echo $publications->links(); ?>
+
+						    </div>						            
+				        </section>
+					</div>
+            	<?php else: ?>
+            		None
+            	<?php endif; ?>
+            </p>
+
+           
+            
+        </div>    
+      </div>
+    </section>
+  </div>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layout.main', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

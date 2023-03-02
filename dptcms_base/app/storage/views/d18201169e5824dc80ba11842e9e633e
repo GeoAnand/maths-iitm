@@ -1,0 +1,40 @@
+<form role="form" id="updateuserbyadmin" data-id="<?php echo $getuser->id; ?>"> 
+  <div class="form-group">
+    <label for="">First Name</label>
+    <input type="text" class="form-control" name="fname" placeholder="Enter First Name" value="<?php echo $getuser->user_fname; ?>">
+  </div>
+  <div class="form-group">
+    <label for="">Last Name</label>
+    <input type="text" class="form-control" name="lname" placeholder="Enter Last Name" value="<?php echo $getuser->user_lname; ?>">
+  </div>
+  <?php /* <?php if($getuser->user_type=='Faculty'): ?> */ ?>
+  <?php /* <div class="row">
+    <div class="form-group" id="subtype">
+      <label class="col-lg-2 control-label">Pick a Faculty type</label>
+      <div class="col-lg-10">
+        <select class="form-control" name="facultytype" required>
+          <option value="0">-- select a Type --</option>
+          <option value="faculty" <?php if($getuser->user_subtype=='Faculty'): ?> selected <?php endif; ?>>Faculty</option>
+          <option value="distinguished" <?php if($getuser->user_subtype=='Distinguished&nbsp;Faculty'): ?> selected <?php endif; ?>>Distinguished Faculty</option>
+          <option value="adjunct" <?php if($getuser->user_subtype=='Adjunct&nbsp;Faculty'): ?> selected <?php endif; ?>>Adjunct Faculty</option>
+           <option value="visiting" <?php if($getuser->user_subtype=='Visiting&nbsp;Faculty'): ?> selected <?php endif; ?>>Visiting Faculty</option>
+
+        </select>
+      </div>
+    </div> 
+    </div> */ ?>          
+  <?php /* <?php endif; ?> */ ?>
+   <div class="form-group">
+    <label for="">Designation</label>
+    <input type="text" class="form-control" name="designation" placeholder="Enter Designation" value="<?php echo $getuser->user_designation; ?>">
+  </div>
+   <div class="form-group">
+    <label for="">Phone No.</label>
+    <input type="text" class="form-control" name="phone" placeholder="Enter Pnone no" value="<?php echo $getuser->user_phone; ?>">
+  </div>
+   <div class="form-group">
+    <label for="">Office</label>
+    <input type="text" class="form-control" name="office" placeholder="Enter Office" value="<?php echo $getuser->user_office; ?>">
+  </div> 
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>

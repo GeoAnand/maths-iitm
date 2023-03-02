@@ -1,0 +1,246 @@
+<?php $__env->startSection('header-title'); ?>
+    <title>Department of Mathematics | Indian Institute Of Technology Madras , Chennai</title>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('content'); ?>
+		<div>
+			<div class="col-sm-8">
+				<h3 class="dpt-text-dark"><?php echo $getprogdetails->program_name; ?></h3>
+			</div>
+<?php if(($getprogdetails->id!=5)): ?> <!-- EDITED BY NARAYANAN to branch out the B.Tech (progam id=5) from other -->
+			<div class="col-sm-4">
+				<ol class="breadcrumb pull-right">
+				  <li>Program</li>
+				  <li class="active"><?php echo $getprogdetails->program_name; ?></li>
+				</ol>
+			</div>
+		</div>
+		<div class="col-sm-12 line line-solid"></div>
+		<div class="col-sm-12" style="padding-top: 20px">
+			<div>
+				<h5 class="dpt-text-dark"><b>Program Overview</b></h5>
+			</div>
+			<div>
+				<?php echo $getprogdetails->overview; ?>
+
+			</div>
+		</div>
+		<div class="col-sm-12" style="padding-top: 20px">
+			<div>
+				<h5 class="dpt-text-dark"><b>Selection Process</b></h5>
+			</div>
+			<div>
+				<?php echo $getprogdetails->selection; ?>
+
+			</div>
+		</div>
+		<div class="col-sm-12" style="padding-top: 20px">
+			<div>
+				<h5 class="dpt-text-dark"><b>Structure of the Program</b></h5>
+			</div>
+			<div>
+				<?php echo $getprogdetails->strictureofprogram; ?>
+
+			</div>
+		</div>
+<?php endif; ?>
+<?php if(($getprogdetails->id==5)): ?> 
+                <div class="col-sm-12 line line-solid"></div>
+                <div class="col-sm-12" style="padding-top: 20px">
+                        <div>
+                                <h5 class="dpt-text-dark"><b></b></h5>
+                        </div>
+                        <div>
+                                <?php echo $getprogdetails->overview; ?>
+
+                        </div>
+                </div>
+</div>
+
+<?php endif; ?>
+		<div class="col-sm-12" style="padding-top: 20px;">
+			<aside class="bg-white-only">
+				<?php
+				$courseexist = Course::where('course_program_id','=',$getprogdetails->id)->get();
+				if(count($courseexist)){
+					$getallyear=Course::groupBy('course_year')->orderBy('course_year','DESC')->orderBy('course_no','ASC')->where('course_program_id','=',$getprogdetails->id)->get();
+					$getcoursedetails=Course::where('course_program_id','=',$getprogdetails->id)->orderBy('course_no','ASC')->where('course_year','=',$getallyear[0]['course_year'])->get();
+					?>
+<!--					<div class="col-sm-12 m-t" style="">
+						<label class="pull-left" style="width:100%;">Select a Year		<select class="form-control inline" style="width: 20%;" id="changebatch" data-sem="<?php echo $getprogdetails->program_total_sem; ?>">
+					            <?php foreach($getallyear as $val): ?>
+					            	<option value="<?php echo $val->course_year; ?>"><?php echo $val->course_year; ?></option>	
+					            <?php endforeach; ?>
+					        </select>
+				        </label>
+					</div> EDITED OFF BY NARAYANAN -->
+					<header class="">
+					    <ul class="nav nav-tabs" id="programmenutab">
+						    <?php for($i=1;$i<$getprogdetails->program_total_sem;$i++): ?>
+								<li class="sem"><a href="#tab<?php echo $i; ?>" data-toggle="tab">Semester <?php echo $i; ?></a></li>
+							<?php endfor; ?>
+<?php if(($getprogdetails->id==3)): ?> 
+<li class="sem"><a href="#tab<?php echo $i; ?>" data-toggle="tab">Courses</a></li> <!--# EDITED by NARAYANAN to add elective tab.-->
+<?php else: ?>
+<li class="sem"><a href="#tab<?php echo $i; ?>" data-toggle="tab">Electives</a></li> <!--# EDITED by NARAYANAN to add elective tab.-->
+<?php endif; ?>					
+    </ul>
+					</header>
+					<div class="tab-content" id="programmenudetails">
+					    <?php for($i=1;$i<=$getprogdetails->program_total_sem;$i++): ?>
+							<div class="tab-pane tabclass" id="tab<?php echo $i; ?>">
+								<?php
+								// $getallyear=Course::groupBy('course_year')->orderBy('course_year','DESC')->where('course_program_id','=',$getprogdetails->id)->where('course_sem','=',$i)->get();
+								$getcoursedetails=Course::where('course_program_id','=',$getprogdetails->id)->where('course_sem','=',$i)->orderBy('course_no','ASC')->where('course_year','=',$getallyear[0]['course_year'])->get();
+								?>
+								<!-- <div class="col-sm-12 m-t" style="">
+									<label class="pull-left" style="width:100%;">Select a Batch								
+										<select class="form-control inline" style="width: 20%;" id="changebatch" data-sem="<?php echo $i; ?>">
+								            <?php foreach($getallyear as $val): ?>
+								            	<option value="<?php echo $val->course_year; ?>"><?php echo $val->course_year; ?></option>	
+								            <?php endforeach; ?>
+								        </select>
+							        </label>
+									
+								</div> -->
+								<div class="col-sm-6" style="padding: 20px;">
+				                  <section class="panel">
+				                    <table class="table table-striped m-b-none text-sm">
+				                      <thead>
+				                        <tr class="dpt-text-dark">
+				                          <th>Course No.</th>
+				                          <th>Course Name</th>                    
+				                          <th>Credit</th>
+				                          <th></th>
+				                        </tr>
+				                      </thead>
+
+				                      <tbody id="courselistbyyear">
+				                      	<?php foreach($getcoursedetails as $val): ?>
+				                      		<tr>                    
+					                          <td>
+					                            <?php echo $val->course_no; ?>
+
+					                          </td>
+					                          <td>
+					                          	<a href="<?php echo url('program/course/'.$val->id); ?>" class="viewcourse" data-coursename="<?php echo $val->course_no.' '.$val->course_name; ?>"><?php echo $val->course_name; ?></a>
+					                          </td>
+					                          <td>
+					                            <?php echo $val->course_credit; ?>
+
+					                          </td>
+					                          <td><a href="<?php echo url('program/course/'.$val->id); ?>" class="viewcourse btn btn-xs btn-info" data-coursename="<?php echo $val->course_no.' '.$val->course_name; ?>">View</a></td>
+					                        </tr>
+										<?php endforeach; ?>		                        
+				                      </tbody>
+				                    </table>
+				                  </section>
+				                </div>
+				                <div class="col-sm-12">
+				               	 <a class="btn dpt-btn-dark" data-href="<?php echo url('program/syllabus/'.$getprogdetails->id); ?>" id="viewsyllabus" data-title="<?php echo $getprogdetails->program_name; ?>" data-year="<?php echo $getallyear[0]['course_year']; ?>" data-sem="<?php echo $i; ?>">View Curriculum</a>
+				               	</div>
+							</div> 
+						<?php endfor; ?>
+					</div>
+				<?php
+				}
+				?>
+			</aside>
+		</div>
+<?php if(($getprogdetails->id!=5)): ?> 
+		
+		<div class="col-sm-12" style="padding-top: 20px">
+			<div>
+				<h5 class="dpt-text-dark"><b>Career Prospects</b></h5>
+			</div>
+			<div>
+				<?php echo $getprogdetails->carrer; ?>
+
+			</div>
+		</div>
+<?php endif; ?>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('modals'); ?>
+@parent
+	<!--Course View Modal -->
+	<div class="modal fade" id="courseViewModal" tabindex="-1" role="dialog" aria-labelledby="courseViewModal" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <!-- <div class="modal-header">
+	        
+	        <h4 class="modal-title" id="course-name">Modal title</h4>
+	      </div> -->
+	      <div class="modal-body">
+	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	        <div id="course_body">
+	        	
+	        </div>
+	      </div>
+	      <!-- <div class="modal-footer">
+	        
+	      </div> -->
+	    </div>
+	  </div>
+	</div>
+
+	<!--Syllabus View Modal -->
+	<div class="modal fade" id="syllabusViewModal" tabindex="-1" role="dialog" aria-labelledby="syllabusViewModal" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header" style="border-bottom:0px">
+	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	        <h4 class="modal-title" style="font-weight:bold">
+	        	<b id="program-title">Modal title</b> <span class="h4">( Semester</span><span id="syllabus-sem" class="h4"></span> <span class="h4">)</span> ----
+	        	<span id="syllabus-year" class="h4" >
+	        </h4>
+
+	      </div>
+	      <div class="modal-body" style="padding-top: 0px;">
+	        <div id="syllabus_body">
+	        	
+	        </div>
+	      </div>
+	      <!-- <div class="modal-footer" style="padding: 6px;">
+	        <div style="padding-bottom:20px">
+				<a href="#" class="btn dpt-btn-dark pull-right" id="downloadSyllabus">Download</a>
+			</div>
+	      </div> -->
+	    </div>
+	  </div>
+	</div>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('footer-scripts'); ?>
+@parent
+	<script type="text/javascript">
+		// var path="<?php echo url('program/courseofsemofyear'); ?>";
+		// $("#changebatch").change(function(){
+		// 	$.post(path+'/'+$(this).val(),{'progid':<?php echo $getprogdetails->id; ?>, 'sem':$(this).attr("data-sem")},function(){
+
+		// 	}).done(function(data){
+		// 		$("#courselistbyyear").html(data);
+		// 	});
+		// });
+
+		var path="<?php echo url('program/courseofyear'); ?>";
+		$("#changebatch").change(function(){
+			var activeSem = $(".nav-tabs .active a").attr('href');
+			$.post(path+'/'+$(this).val(),{'progid':<?php echo $getprogdetails->id; ?>, 'progname':'<?php echo $getprogdetails->program_name; ?>','sem':$(this).attr("data-sem")},function(){
+
+			}).done(function(data){
+				$("#programmenudetails").html(data);
+				if (activeSem!='#tab1') {	
+					$('#programmenutab a[href="#tab1"]').tab('show'); 
+				}else{
+					$('#programmenutab a[href="#tab2"]').tab('show'); 
+				}			
+			}).complete(function(){alert(activeSem);
+				$('#programmenutab a[href='+activeSem+']').tab().trigger('click'); 
+			});
+		});
+
+	</script>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layout.main', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -1,0 +1,56 @@
+<?php
+
+class ReportController extends \BaseController {
+	public function getReport()
+	{
+		return View::make('admin.report');
+	}
+
+	public function postPeople()
+	{
+
+
+	}
+	public function postPublication()
+	{
+	$tmp=Input::get('reportto');			
+$getallpublication=Publications::where('created_at','>=',date("Y-m-d", strtotime(Input::get('reportfrom'))))->where('created_at','<=',date("Y-m-d", strtotime(!empty($tmp)?Input::get('reportto'):date('Y-m-d'))))->get();
+		return View::make('admin.report.publication',array('getallpublication'=>$getallpublication));
+
+	}
+
+	public function postStudent()
+	{
+
+	}
+
+	public function postPrograms()
+	{
+
+	}
+
+	public function postEvents()
+	{
+	$tmp=Input::get('reportto');		
+$getallevents=Events::where('created_at','>=',date("Y-m-d", strtotime(Input::get('reportfrom'))))->where('created_at','<=',date("Y-m-d", strtotime(!empty($tmp)?Input::get('reportto'):date('Y-m-d'))))->get();
+		return View::make('admin.report.event',array('getallevents'=>$getallevents));
+	}
+
+	public function postResources()
+	{
+
+	}
+
+	public function postNews()
+	{
+	$tmp=Input::get('reportto');			
+$getallnews=News::where('created_at','>=',date("Y-m-d", strtotime(Input::get('reportfrom'))))->where('created_at','<=',date("Y-m-d", strtotime(!empty($tmp)?Input::get('reportto'):date('Y-m-d'))))->where('news_type','=',1)->get();
+		return View::make('admin.report.news',array('getallnews'=>$getallnews));
+	}
+
+	public function postAnnouncement()
+	{
+		$getallannouncement=News::where('created_at','>=',date("Y-m-d", strtotime(Input::get('reportfrom'))))->where('created_at','<=',date("Y-m-d", strtotime(!empty($tmp)?Input::get('reportto'):date('Y-m-d'))))->where('news_type','=',2)->get();
+		return View::make('admin.report.announcement',array('getallannouncement'=>$getallannouncement));
+	}
+}

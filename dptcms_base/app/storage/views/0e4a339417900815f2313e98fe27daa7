@@ -1,0 +1,88 @@
+<?php $__env->startSection('header-title'); ?>
+   <title>Admin Panel - Recent Publications | DeptCMS</title>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('content'); ?>
+	<div class="col-sm-12">
+	  <!-- .breadcrumb -->
+	  <ul class="breadcrumb">
+	    <li><a href="<?php echo url('admin/home'); ?>"><i class="fa fa-home"></i> Home</a></li>
+	    <li><a href="<?php echo url('admin/research/dashboard'); ?>"><i class="fa fa-book"></i> Research</a></li>
+	    <li class="active"> Recent Publications </li>
+	  </ul>
+	  <!-- / .breadcrumb -->
+	    
+	<section class="panel">
+	    <header class="panel-heading font-bold"> 
+	    	Recent Publications
+	    </header>	    
+	    <div class="panel-body">
+			<section class="panel">		        	
+		        <div class="row">		        	
+		        	<div class="col-sm-12 m-t m-b" align="center">
+		        		<form class="form-inline" role="form" action="javascript:void(0)">
+							<div class="form-group has-feedback">
+								<input type="text" class="form-control" id="publicationsearch" placeholder="Search Publications">
+								<span class="fa fa-search form-control-feedback"></span>
+							</div>
+						</form>
+		        	</div>
+		        </div>				
+		        <div class="table-responsive">
+			        <table class="table table-striped b-t text-sm">
+			            <thead>
+			              <tr>
+			                <th width="62">S. No.</th>
+			                <th class="th-sortable" data-toggle="class">Title
+			                  <span class="th-sort">
+			                    <i class="fa fa-sort-down text"></i>
+			                    <i class="fa fa-sort-up text-active"></i>
+			                    <i class="fa fa-sort"></i>
+			                  </span>
+			                </th>
+			                <th>Authors</th>
+			                <th>Journal</th>
+			                <th>Year</th>
+			              </tr>
+			            </thead>
+			            <tbody id="publicationlist">
+			              	<?php if(count($getRecentPublications)): ?>
+			              	<?php $i=1; ?>		                  	
+		                  		<?php foreach($getRecentPublications as $val): ?>
+				                  	<tr>                    
+				                      	<td>
+				                     		<?php echo $i; ?> 
+				                      	</td>
+				                      	<td>
+				                      		<?php echo $val->title; ?> 
+				                      	</td>
+				                      	<td>
+				                       		<?php echo $val->author; ?>
+
+				                      	</td>
+				                      	<td>
+				                      		<?php echo $val->journal; ?>
+
+				                      	</td>
+				                      	<td>
+				                       		<?php echo $val->year; ?>
+
+				                      	</td>
+				                    </tr>
+			                    	<?php $i++ ?>
+		                    	<?php endforeach; ?>
+		              		<?php endif; ?>	              
+			            </tbody>
+			        </table>
+		        </div>
+		        <div class="col-sm-12 text-center" id="publicationsPaginate">
+				      <?php echo $getRecentPublications->links(); ?>
+
+				</div>		        
+			</section>
+		</div>
+	</section>
+</div>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('admin.layouts.main', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

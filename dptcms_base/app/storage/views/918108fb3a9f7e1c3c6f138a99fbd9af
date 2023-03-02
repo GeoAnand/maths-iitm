@@ -1,0 +1,66 @@
+<?php $__env->startSection('header-title'); ?>
+    <title>Department of Mathematics | Indian Institute Of Technology Madras , Chennai</title>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('content'); ?>
+	<div>
+		<div class="col-sm-8">
+			<h3 class="dpt-text-dark">Links</h3>
+		</div>
+		<div class="col-sm-4">
+			<ol class="breadcrumb pull-right">
+			  <li>Resource</li>
+			  <li class="active">Links</li>
+			</ol>
+		</div>
+	</div>
+	<div class="col-sm-12 line line-solid"></div>
+	<div class="col-sm-12">
+		<?php if(count($getalllinks)): ?>
+			<?php if(Auth::check()): ?>
+				<div class="col-sm-6">
+				Public Links
+					<?php for($i=0;$i < count($getalllinks);$i++): ?>
+						<?php if($getalllinks[$i]['needlogin']==0): ?>
+							<div class="m-t m-b">
+							    <a href="<?php echo $getalllinks[$i]['resource_links_link']; ?>" target="_blank" class="list-group-item noborder"> 
+							    	<i class="fa fa-fw fa-external-link"></i> <?php echo $getalllinks[$i]['resource_links_title']; ?>
+
+							    </a>
+							</div>					
+						<?php endif; ?>
+					<?php endfor; ?>
+				</div>
+				<div class="col-sm-6">
+				Confidential Links
+					<?php for($i=0;$i < count($getalllinks);$i++): ?>
+						<?php if($getalllinks[$i]['needlogin']!=0): ?>
+							<div class="m-t m-b">
+							    <a href="<?php echo $getalllinks[$i]['resource_links_link']; ?>" target="_blank" class="list-group-item noborder"> 
+							    	<i class="fa fa-fw fa-external-link"></i> <?php echo $getalllinks[$i]['resource_links_title']; ?>
+
+							    </a>
+							</div>					
+						<?php endif; ?>
+					<?php endfor; ?>
+				</div>
+			<?php else: ?>
+				<?php for($i=0;$i < count($getalllinks);$i++): ?>
+					<?php if($getalllinks[$i]['needlogin']==0): ?>
+						<div class="m-t m-b">
+						    <a href="<?php echo $getalllinks[$i]['resource_links_link']; ?>" target="_blank" class="list-group-item noborder"> 
+						    	<i class="fa fa-fw fa-external-link"></i> <?php echo $getalllinks[$i]['resource_links_title']; ?>
+
+						    </a>
+						</div>					
+					<?php endif; ?>
+				<?php endfor; ?>
+			<?php endif; ?>
+		<?php else: ?>
+			<span class="text-muted wrapper text-center center-block">
+		        <i class="fa fa-warning fa-4x"></i> <br/>Sorry! There are no external links to be displayed. 
+		    </span>
+		<?php endif; ?>
+	</div>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layout.main', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

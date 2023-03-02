@@ -1,0 +1,65 @@
+<?php $__env->startSection('header-title'); ?>
+   <title>Admin Panel | DeptCMS</title>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('content'); ?>
+<div class="col-sm-12">
+  <!-- .breadcrumb -->
+  <ul class="breadcrumb">
+    <li><a href="<?php echo url('admin/home'); ?>"><i class="fa fa-home"></i> Home</a></li>
+    <li><a href="<?php echo url('admin/resources/dashboard'); ?>"><i class="fa fa-bars"></i> Resources</a></li>
+    <li class="active"> Conference Halls</li>
+  </ul>
+  <!-- / .breadcrumb -->
+
+  <section class="panel">    
+    <header class="panel-heading font-bold">
+        Resources : Conference Halls
+    </header>
+    
+    <div class="panel-body">
+		<section class="panel">
+	        <header class="panel-heading">
+	          Conference Halls
+	          <a href="<?php echo url('admin/resources/addhalls'); ?>" class="pull-right btn btn-info btn-xs add-hall-btn"><i class="fa fa-plus"></i> Add a Hall</a>
+	        </header>	        
+	        <div class="table-responsive">
+	          <table class="table table-striped b-t text-sm">
+	            <thead>
+	              <tr>
+	                <th width="62">S. No.</th>
+	                <th class="th-sortable" data-toggle="class">Hall Name
+	                  <span class="th-sort">
+	                    <i class="fa fa-sort-down text"></i>
+	                    <i class="fa fa-sort-up text-active"></i>
+	                    <i class="fa fa-sort"></i>
+	                  </span>
+	                </th>
+	                <th>Hall Details</th>
+	                <th>Hall Incharge</th>
+	                <th>Contact</th>
+	                <th>Delete</th>
+	              </tr>
+	            </thead>
+	            <tbody id="autoRefresh">
+	             <?php for($i=0;$i < count($getallhalls);$i++): ?>
+	              <tr><?php $j = $i+1;?>
+	                <td><?php echo $j; ?></td>
+	                <td><?php echo $getallhalls[$i]['conference_halls_name']; ?></td>
+	                <td><?php echo $getallhalls[$i]['conference_halls_details']; ?></td>
+	                <td><?php echo $getallhalls[$i]['conference_halls_incharge']; ?></td>
+	                <td><?php echo $getallhalls[$i]['conference_halls_contact']; ?></td>
+	                <td>
+	                  <a href="#" class="btn btn-xs btn-danger deletehall" data-toggle="class" data-id="<?php echo $getallhalls[$i]['id']; ?>"><i class="fa fa-trash-o"></i> Delete</a>
+	                </td>
+	              </tr>
+	              <?php endfor; ?>	              
+	            </tbody>
+	          </table>
+	        </div>	        
+	    </section>
+	</div>
+</section>
+</div>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('admin.layouts.main', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

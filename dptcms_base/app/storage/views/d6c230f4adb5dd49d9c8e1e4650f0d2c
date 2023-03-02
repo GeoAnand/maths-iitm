@@ -1,0 +1,84 @@
+<?php $__env->startSection('header-title'); ?>
+    <title>Department of Mathematics | Indian Institute Of Technology Madras , Chennai</title>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('content-heading'); ?>
+Publications
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('content'); ?>	
+  
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="col-sm-8">
+        <h3 class="dpt-text-dark">Publication</h3>
+      </div>
+      <div class="col-sm-4">
+        <ol class="breadcrumb pull-right">
+          <li><a href="#">Research</a></li>
+          <li class="active">Publications</li>
+        </ol>
+      </div>
+      <div class="col-sm-12 line line-solid"></div>
+    </div>      
+  </div>
+    
+  <div class="wrapper">
+    <section class="panel">
+      <div class="panel-body">
+        <div class="col-md-12">
+            <h3 class="font-bold m-b"><?php echo $getpublicationdetails['title']; ?></h3>
+            <?php if($getpublicationdetails['bibliography']!=""): ?>
+              <h4 class="font-bold m-t m-b-none">Bibliography:</h4>
+              <span style="font-size:14px;"><?php echo $getpublicationdetails['bibliography']; ?></span>    <br/>                  
+            <?php endif; ?>
+
+            <?php if($getpublicationdetails['author']!=""): ?>
+              <h4 class="font-bold m-t m-b-none">Authors:</h4>              
+              <span style="font-size:14px;">
+              <?php 
+                // $getauthors=array_values(array_filter(explode(',',$getpublicationdetails['author'])));
+              ?>
+              <?php /* <?php for($i=0;$i < count($getauthors);$i++): ?> */ ?>
+                <?php 
+                  // $getauthname=User::find($getauthors[$i]);
+                ?>
+              <?php /* <?php echo $getauthname->user_fname; ?> <?php echo $getauthname->user_lname; ?> */ ?>
+              <?php /* <?php endfor; ?> */ ?>
+              <?php echo $getpublicationdetails['author']; ?>
+
+              </span>    <br/>                  
+            <?php endif; ?>
+
+            <?php if($getpublicationdetails['journal']!=""): ?>
+              <h4 class="font-bold m-t m-b-none">Journal:</h4>
+              <span style="font-size:14px;"><?php echo $getpublicationdetails['journal']; ?></span>    <br/>                  
+            <?php endif; ?>
+
+            <?php if($getpublicationdetails['year']!=""): ?>
+              <h4 class="font-bold m-t m-b-none">year:</h4>
+              <span style="font-size:14px;"><?php echo $getpublicationdetails['year']; ?></span>    <br/>                  
+            <?php endif; ?>
+
+            <?php if($getpublicationdetails['abstract']!=""): ?>
+              <h4 class="font-bold m-t m-b-none">Abstract:</h4>
+              <span style="font-size:14px;"><?php echo $getpublicationdetails['abstract']; ?></span>    <br/>                  
+            <?php endif; ?>
+
+            <?php if($getpublicationdetails['issn']!=""): ?>
+              <h4 class="font-bold m-t m-b-none">ISSN:</h4>
+              <span style="font-size:14px;"><?php echo $getpublicationdetails['issn']; ?></span>    <br/>                  
+            <?php endif; ?>
+
+            <?php if($getpublicationdetails['url']!=""): ?>
+              <h4 class="font-bold m-t m-b-none">Website:</h4>
+              <a href="<?php echo $getpublicationdetails['url']; ?>">
+              <span style="font-size:14px;"><?php echo $getpublicationdetails['url']; ?></span></a>    <br/>                  
+            <?php endif; ?>
+            
+        </div>    
+      </div>
+    </section>
+  </div>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layout.main', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

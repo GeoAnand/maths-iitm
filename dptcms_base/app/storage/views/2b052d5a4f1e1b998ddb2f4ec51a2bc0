@@ -1,0 +1,153 @@
+<?php $__env->startSection('header-title'); ?>
+    <title>Department of Mathematics | Indian Institute Of Technology Madras , Chennai</title>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('content'); ?>
+
+	<div>
+		<div class="col-sm-8">
+			<h3 class="dpt-text-dark"><?php echo $getcatname->events_type_name; ?></h3>
+		</div>
+		<div class="col-sm-4">
+			<ol class="breadcrumb pull-right">
+			  <li>Event</li>
+			  <li class="active"><?php echo $getcatname->events_type_name; ?></li>
+			</ol>
+		</div>
+	</div>	
+	<div class="col-sm-12">
+	<section class="panel">
+		<?php if($geteventfortype->count()): ?>	    	
+			<header class="">
+			    <ul class="nav nav-tabs" id="">
+				    <li class="active"><a href="#upcomingEvents" data-toggle="tab" class="tab-with-btn-sm">Upcoming Events</a></li>		    
+					<li class=""><a href="#pastEvents" data-toggle="tab" class="tab-with-btn-sm">Past Events</a></li>	
+			    </ul>
+			 </header>
+		<?php else: ?>
+			<div class="col-sm-12 line line-solid"></div>
+		<?php endif; ?>
+	
+		<div class="panel-body">
+			<div class="tab-content m-t" id="eventsList">
+	    		<?php if($geteventfortype->count()): ?>
+		            <div class="tab-pane fade active in" id="upcomingEvents">
+		            <?php $i=0;?>
+		            <?php foreach($geteventfortype as $val): ?>
+		            	<?php if(strtotime($val->events_date) >= strtotime(date('Y-m-d'))): ?>
+		                <?php $i++;?>
+		                <div class="col-sm-6 each-event" data-id="<?php echo $val->id; ?>">
+		                    <section class="panel dpt-bg-light">
+		                        <div class="panel-body lter" style="height:164px;" >
+		                          <a class="pull-right">
+<i class="fa fa-calendar"></i> <?php echo date("d-m-Y", strtotime($val->events_date))?>   <?php if(($val->events_end_date>$val->events_date)): ?> to <!-- to EDITED NARAYANAN--> <?php echo date("d-m-Y", strtotime($val->events_end_date))?>  <?php endif; ?> </a> 
+		                          <a class="pull-left">		                          	 
+		                          	<?php 
+										$eventhall=Conferencehall::where('id', '=', $val->events_place)->pluck('conference_halls_name'); 
+									?>
+									<?php if(count($eventhall)): ?>
+	                              		<small class="block"><i class="fa fa-map-marker fa-2x m-r-sm"></i> <?php echo $eventhall; ?></small>
+	                              	<?php endif; ?>
+		                          </a>
+		                          <div class="text-center padder m-t">		                          	
+			                            <span class="h4 block">
+			                           		<?php if(strlen($val->events_name)>100): ?> 
+			                            		<?php echo substr($val->events_name,0,100); ?> ...
+			                            	<?php elseif(strlen($val->events_name)<50): ?>
+			                            		<br/>			                            		
+			                            		<?php echo $val->events_name; ?>
+
+			                            	<?php else: ?>
+			                            		<?php echo $val->events_name; ?>
+
+			                            	<?php endif; ?>
+			                            </span>
+			                            <span class="block">
+			                            <?php echo date("d-m-Y", strtotime($val->events_date))?>
+			                            </span>
+			                            <span class="h5 font-bold block" style="color:#555;">
+			                            	<?php echo $val->mainspeaker; ?>                     	
+			                            </span>			                        
+		                          </div>
+		                        </div>
+		                        <footer class="panel-footer dpt-btn-dark">
+		                          <div class="row">
+		                            <div class="col-xs-12">
+			                        	<a href="<?php echo url('event/view/'.$val->id); ?>" class="text-center center-block font-bold" style="color:#fff;">View Details</a>
+		                            </div>	                                                       
+		                          </div>
+		                        </footer>
+		                    </section>
+		                </div>
+		                <?php endif; ?>
+		            <?php endforeach; ?> 
+		            <?php if($i==0): ?>
+		            	<span>There are no upcoming events.</span>
+		            <?php endif; ?>
+		            </div>
+		            <div class="tab-pane fade " id="pastEvents">
+		            <?php $i=0;?>
+		            <?php foreach($geteventfortpe as $val): ?> <!-- EDITED NARAYANAN -->
+		            	<?php if(strtotime($val->events_date) < strtotime(date('Y-m-d'))): ?>
+		            	<?php $i++;?>
+		                <div class="col-sm-6 each-event" data-id="<?php echo $val->id; ?>">
+		                    <section class="panel dpt-bg-light">
+		                        <div class="panel-body lter" style="height:164px;">
+		                          <!-- <a class="pull-right text-muted"><i class="fa fa-calendar"></i> <?php echo $val->events_date; ?></a> -->
+		                          <!-- <a class="pull-left">		                          	 
+		                          	<?php 
+										$eventhall=Conferencehall::where('id', '=', $val->events_place)->pluck('conference_halls_name'); 
+									?>
+						<?php if(count($eventhall)): ?>
+	                              		<small class="text-muted block"><i class="fa fa-map-marker fa-2x m-r-sm"></i> <?php echo $eventhall; ?></small>
+	                              	<?php endif; ?>
+		                          </a> -->
+		                          <div class="text-center padder m-t">		                          	
+			                            <span class="h4 block">
+			                           		<?php if(strlen($val->events_name)>100): ?> 
+			                            		<?php echo substr($val->events_name,0,100); ?> ...
+			                            	<?php elseif(strlen($val->events_name)<50): ?>
+			                            		<br/>			                            		
+			                            		<?php echo $val->events_name; ?>
+
+			                            	<?php else: ?>
+			                            		<?php echo $val->events_name; ?>
+
+			                            	<?php endif; ?>
+			                            </span>
+			                             <span class="block">
+			                           <?php echo date("d-m-Y", strtotime($val->events_date))?>  <?php if(($val->events_end_date>$val->events_date)): ?>  to  <!--to  EDITED NARAYANAN -->  <?php echo date("d-m-Y", strtotime($val->events_end_date))?>  <?php endif; ?>
+			                            </span>
+			                            <span class="h5 font-bold block" style="color:#555;">
+			                            	<?php echo $val->mainspeaker; ?>		                            	
+			                            </span>			                        
+		                          </div>
+		                        </div>
+		                        <footer class="panel-footer dpt-btn-dark">
+		                          <div class="row">
+		                            <div class="col-xs-12">
+			                        	<a href="<?php echo url('event/view/'.$val->id); ?>" class="text-center center-block font-bold" style="color:#fff;">View Details</a>
+		                            </div>	                                                       
+		                          </div>
+		                        </footer>
+		                    </section>
+		                </div>
+		                <?php endif; ?>
+		            <?php endforeach; ?> 
+		            <?php if($i==0): ?>
+		            	<span>There are no past events.</span>
+		            <?php endif; ?>
+		            </div>
+		        <?php else: ?>
+		        	<span class="text-muted wrapper text-center center-block">
+			            <i class="fa fa-warning fa-4x"></i> <br/>Sorry! Currently there are no <?php echo $getcatname->events_type_name; ?>.
+			        </span>
+		        <?php endif; ?>
+	        </div>
+	    </div>
+    </section>
+    </div>
+
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layout.main', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

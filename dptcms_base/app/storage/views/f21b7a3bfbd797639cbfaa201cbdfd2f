@@ -1,0 +1,102 @@
+<?php $__env->startSection('header-title'); ?>
+   <title>Department of Mathematics | Indian Institute Of Technology Madras , Chennai</title>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('content'); ?>
+<style type="text/css">
+	.table-striped>tbody>tr:nth-child(odd)>td, .table-striped>tbody>tr:nth-child(odd)>th{
+		background: transparent;
+	}
+</style>
+
+<div>
+	<div>
+		<div class="col-sm-8">
+			<h3 class="dpt-text-dark"><?php echo $geteventdetails->events_name; ?></h3>
+		</div>
+		<div class="col-sm-4">
+			<ol class="breadcrumb pull-right">
+			  <li>Event</li>
+			  <li class="active"><?php echo $geteventdetails->eventcategory->events_type_name; ?></li>
+			</ol>
+		</div>
+	</div>
+	<div class="col-sm-12 line line-solid"></div>
+	<div>
+		<div class="col-sm-8">
+			 <?php if(!empty($geteventdetails->mainspeaker)): ?>
+				<h4>Speaker : <?php echo $geteventdetails->mainspeaker; ?></h4>
+			 <?php else: ?>
+            	<h4>Speaker : Not Specified</h4>
+            <?php endif; ?>
+		</div>
+		<div class="col-sm-4">
+			<h4 style="display:inline" class="pull-right">
+	      		<i class="fa fa-calendar "></i>
+				<?php echo date("d-m-Y", strtotime($geteventdetails->events_date))?> <?php if(($geteventdetails->events_end_date>$geteventdetails->events_date)): ?> to <!--to EDITED NARAYANAN--> <?php echo date("d-m-Y", strtotime($geteventdetails->events_end_date))?> <?php endif; ?>
+			</h4>
+		</div>
+	</div>
+	<div class="col-sm-12 line line-solid"></div>
+	<div class="col-sm-12" style="padding-top: 20px">
+		<div class="col-sm-8">
+			<?php if(!empty($geteventdetails->posterimage)): ?>
+			<img src="<?php echo URL::asset('/siteimages/eventimage/'.$geteventdetails->posterimage); ?>" alt="" style="max-height: 336px;;">
+			<?php endif; ?>
+			<h4 class="text-uc m-t">Abstract :</h4>
+	        <p style="font-size: 18px;"> 
+	        	<?php echo $geteventdetails->events_desc; ?>
+
+	        </p>
+		</div>
+		<div class="col-sm-3 col-sm-offset-1">
+			<span class="block m-t m-b-xs">                        
+                <strong class="block"><i class="fa fa-user"></i> Key Speaker</strong>
+                <?php if(!empty($geteventdetails->mainspeaker)): ?>
+                	<small><?php echo $geteventdetails->mainspeaker; ?></small>
+                <?php else: ?>
+                	<small>Not specified</small>
+                <?php endif; ?>
+            </span>
+            <br/>
+            <span class="block m-b-xs">                        
+                <strong class="block"><i class="fa fa-map-marker"></i> Place</strong>
+
+                <small><?php echo $eventhall; ?></small>
+            </span>
+            <br/>	            
+            <span class="block m-b-xs">                       
+                <strong class="block"><i class="fa fa-clock-o"></i> Start Time</strong>
+                <?php if(!empty($geteventdetails->events_starttime)): ?>
+                	<small><?php echo $geteventdetails->events_starttime; ?></small>
+                <?php else: ?>
+                	<small>Not Specified</small>
+                <?php endif; ?>
+            </span>
+            <br/>
+            <span class="block m-b-xs">                    
+                <strong class="block"><i class="fa fa-clocl-o"></i> Finish Time</strong>
+                <?php if(!empty($geteventdetails->events_endtime)): ?>
+                	<small><?php echo $geteventdetails->events_endtime; ?></small>
+                <?php else: ?>
+                	<small>Not Specified</small>
+                <?php endif; ?>
+            </span>
+            <br/>
+            <span class="block m-b-xs">                       
+                <strong class="block"><i class="fa fa-external-link"></i> External Link</strong>
+                <?php if(!empty($geteventdetails->externallink)): ?>
+                	<small><a href="<?php echo $geteventdetails->externallink; ?>" target="_blank"><?php echo $geteventdetails->externallink; ?></a></small>
+                <?php else: ?>
+                	<small>None</small>
+                <?php endif; ?>
+            </span>
+		</div>
+
+		
+	</div>
+</div>
+
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layout.main', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
