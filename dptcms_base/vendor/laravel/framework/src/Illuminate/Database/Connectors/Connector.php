@@ -41,6 +41,7 @@ class Connector {
 	public function createConnection($dsn, array $config, array $options)
 	{
 		$username = array_get($config, 'username');
+		echo $username;
 
 		$password = array_get($config, 'password');
 

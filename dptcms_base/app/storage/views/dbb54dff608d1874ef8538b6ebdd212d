@@ -7,83 +7,83 @@
 <!--<![endif]-->
 
   <head>
-    @section('header-meta')
+    <?php $__env->startSection('header-meta'); ?>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <meta name="description" content="Mathematics, deptCMS, dptCMS, department, website, IIT, Desto Creative Solutions, Chennai, app, web app, admin dashboard, admin">
         <meta name="viewport" content="width=device-width,  initial-scale=1, maximum-scale=1" />
-    @show
-    @section('header-title')
+    <?php echo $__env->yieldSection(); ?>
+    <?php $__env->startSection('header-title'); ?>
         <title>DeptCMS</title>
-    @show
+    <?php echo $__env->yieldSection(); ?>
 
-    @section('header-favicon')
-    <link rel="shortcut icon" href="{{URL::asset('favicon.png') }}" type="image/x-icon">
-    @show
+    <?php $__env->startSection('header-favicon'); ?>
+    <link rel="shortcut icon" href="<?php echo URL::asset('favicon.png'); ?>" type="image/x-icon">
+    <?php echo $__env->yieldSection(); ?>
 
-    @section('header-styles')  
-        <link rel="stylesheet" href="{{URL::asset('lib/bootstrap/dist/css/bootstrap.min.css')}}" type="text/css" />
-        <link rel="stylesheet" href="{{ URL::asset('css/admin/theme/animate.css') }}" type="text/css" />
-        <link rel="stylesheet" href="{{ URL::asset('css/admin/theme/font-awesome.min.css') }}" type="text/css" />
-        <link rel="stylesheet" href="{{ URL::asset('css/admin/theme/font.css') }}" type="text/css" cache="false" />
-        <link rel="stylesheet" href="{{ URL::asset('js/fuelux/fuelux.css') }}" type="text/css" cache="false" />        
-        <link rel="stylesheet" href="{{ URL::asset('css/admin/theme/plugin.css') }}" type="text/css" />
-        <link rel="stylesheet" href="{{ URL::asset('css/admin/theme/app.css') }}" type="text/css" />
-        <link rel="stylesheet" href="{{ URL::asset('css/typeahead.js-bootstrap.css') }}" type="text/css" />
-        <!-- <link rel="stylesheet" href="{{ URL::asset('css/jquery.marquee.min.css') }}" type="text/css" />  marquee -->
-        <!-- <link rel="stylesheet" href="{{ URL::asset('lib/bootstrap-datepicker/css/datepicker.css') }}" type="text/css" />
-        <link rel="stylesheet" href="{{ URL::asset('lib/bootstrap-datepicker/css/datepicker3.css') }}" type="text/css" /> -->
-        <link rel="stylesheet" href="{{URL::asset('css/bootstrap-datetimepicker.min.css')}}">
-        <link rel="stylesheet" href="{{URL::asset('css/main.css')}}" type="text/css" />
-        <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme/default.css')}}">
-        <link rel="stylesheet" type="text/css" href="{{URL::asset('css/style_v2.css')}}">
-        {{-- <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme/math.css')}}"> --}}
-        <script type='text/javascript' src="{{URL::asset('js/jstyle.js')}}"></script>
+    <?php $__env->startSection('header-styles'); ?>  
+        <link rel="stylesheet" href="<?php echo URL::asset('lib/bootstrap/dist/css/bootstrap.min.css'); ?>" type="text/css" />
+        <link rel="stylesheet" href="<?php echo URL::asset('css/admin/theme/animate.css'); ?>" type="text/css" />
+        <link rel="stylesheet" href="<?php echo URL::asset('css/admin/theme/font-awesome.min.css'); ?>" type="text/css" />
+        <link rel="stylesheet" href="<?php echo URL::asset('css/admin/theme/font.css'); ?>" type="text/css" cache="false" />
+        <link rel="stylesheet" href="<?php echo URL::asset('js/fuelux/fuelux.css'); ?>" type="text/css" cache="false" />        
+        <link rel="stylesheet" href="<?php echo URL::asset('css/admin/theme/plugin.css'); ?>" type="text/css" />
+        <link rel="stylesheet" href="<?php echo URL::asset('css/admin/theme/app.css'); ?>" type="text/css" />
+        <link rel="stylesheet" href="<?php echo URL::asset('css/typeahead.js-bootstrap.css'); ?>" type="text/css" />
+        <!-- <link rel="stylesheet" href="<?php echo URL::asset('css/jquery.marquee.min.css'); ?>" type="text/css" />  marquee -->
+        <!-- <link rel="stylesheet" href="<?php echo URL::asset('lib/bootstrap-datepicker/css/datepicker.css'); ?>" type="text/css" />
+        <link rel="stylesheet" href="<?php echo URL::asset('lib/bootstrap-datepicker/css/datepicker3.css'); ?>" type="text/css" /> -->
+        <link rel="stylesheet" href="<?php echo URL::asset('css/bootstrap-datetimepicker.min.css'); ?>">
+        <link rel="stylesheet" href="<?php echo URL::asset('css/main.css'); ?>" type="text/css" />
+        <link rel="stylesheet" type="text/css" href="<?php echo URL::asset('css/theme/default.css'); ?>">
+        <link rel="stylesheet" type="text/css" href="<?php echo URL::asset('css/style_v2.css'); ?>">
+        <?php /* <link rel="stylesheet" type="text/css" href="<?php echo URL::asset('css/theme/math.css'); ?>"> */ ?>
+        <script type='text/javascript' src="<?php echo URL::asset('js/jstyle.js'); ?>"></script>
         <!-- fonts -->
 	      <link rel="preconnect" href="https://fonts.googleapis.com">
 	      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	      <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
         <!-- skillskapes - CSS -->
-        <link rel="stylesheet" href="{{URL::asset('css/theme/skillskapes.css')}}" type="text/css" />
-         <!-- <link rel="stylesheet" href="{{-- {{URL::asset('css/pi.css')}} --}}" type="text/css" /> -->
-    @show
+        <link rel="stylesheet" href="<?php echo URL::asset('css/theme/skillskapes.css'); ?>" type="text/css" />
+         <!-- <link rel="stylesheet" href="<?php /* <?php echo URL::asset('css/pi.css'); ?> */ ?>" type="text/css" /> -->
+    <?php echo $__env->yieldSection(); ?>
 
-    @section('header-scripts')
+    <?php $__env->startSection('header-scripts'); ?>
         <script>
         function changeTheme(theme){
           switch (theme)
           {
-            case '1': themeLink = "{{URL::asset('css/main.css')}}";
+            case '1': themeLink = "<?php echo URL::asset('css/main.css'); ?>";
                       break;
-            case '2': themeLink = "{{URL::asset('css/theme/basic.css')}}";
+            case '2': themeLink = "<?php echo URL::asset('css/theme/basic.css'); ?>";
                       break;
-            case '3': themeLink = "{{URL::asset('css/theme/iitm-1.css')}}";
+            case '3': themeLink = "<?php echo URL::asset('css/theme/iitm-1.css'); ?>";
                       break;
-            case '4': themeLink = "{{URL::asset('css/theme/nccrd-kaust.css')}}";
+            case '4': themeLink = "<?php echo URL::asset('css/theme/nccrd-kaust.css'); ?>";
                       break;
-            case '5': themeLink = "{{URL::asset('css/theme/nccrd-orange.css')}}";
+            case '5': themeLink = "<?php echo URL::asset('css/theme/nccrd-orange.css'); ?>";
                       break; 
-            case '6': themeLink = "{{URL::asset('css/theme/nccrd-theme-1.css')}}";
+            case '6': themeLink = "<?php echo URL::asset('css/theme/nccrd-theme-1.css'); ?>";
                       break;
-            case '7': themeLink = "{{URL::asset('css/theme/nccrd-theme-2.css')}}";
+            case '7': themeLink = "<?php echo URL::asset('css/theme/nccrd-theme-2.css'); ?>";
                       break;
-            case '8': themeLink = "{{URL::asset('css/theme/nccrd-ICIWS.css')}}";
+            case '8': themeLink = "<?php echo URL::asset('css/theme/nccrd-ICIWS.css'); ?>";
                       break;
-            case '9': themeLink = "{{URL::asset('css/theme/nccrd-ICIWS-2.css')}}";
+            case '9': themeLink = "<?php echo URL::asset('css/theme/nccrd-ICIWS-2.css'); ?>";
                       break;        
-            case '10': themeLink = "{{URL::asset('css/theme/nccrd-slaty-blue.css')}}";
+            case '10': themeLink = "<?php echo URL::asset('css/theme/nccrd-slaty-blue.css'); ?>";
                       break;
-            case '11': themeLink = "{{URL::asset('css/theme/nccrd-green.css')}}";
+            case '11': themeLink = "<?php echo URL::asset('css/theme/nccrd-green.css'); ?>";
                       break;
-            default:  themeLink = "{{URL::asset('css/theme/nccrd-ICIWS-2.css')}}"; 
+            default:  themeLink = "<?php echo URL::asset('css/theme/nccrd-ICIWS-2.css'); ?>"; 
           }
           jstyle.addLink(themeLink);
         }
           
         </script>
-        <script src="{{URL::asset('lib/jquery/dist/jquery.min.js') }}"></script>
+        <script src="<?php echo URL::asset('lib/jquery/dist/jquery.min.js'); ?>"></script>
         <script type="text/javascript" async
-          src="{{URL::asset('js/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML')}}">
+          src="<?php echo URL::asset('js/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML'); ?>">
         </script>
         <script type="text/javascript">
         $(document).on("change", "select[name='theme']", function(e){
@@ -96,7 +96,7 @@
             <script src="js/ie/html5.js" cache="false"></script>
             <script src="js/ie/fix.js" cache="false"></script>
         <![endif]-->
-    @show
+    <?php echo $__env->yieldSection(); ?>
   </head>
     
   <!-- HTML code from Bootply.com editor -->
@@ -110,7 +110,7 @@
       <!-- <div class="row" id="topMostHeader"></div> -->
       <div class="row">
           <div class="col-sm-3 col-sm-offset-9">
-            {{-- <select name="theme" class="form-control m-b m-t m-r pull-right">
+            <?php /* <select name="theme" class="form-control m-b m-t m-r pull-right">
               <option value="1">Default Theme</option>
               <option value="2">Base Theme</option>
               <option value="3">IITM Theme 1</option>
@@ -121,7 +121,7 @@
               <option value="8">Olive Light</option>
               <option value="10">Slaty Blue</option>
               <option value="11">Green</option>
-            </select> --}}
+            </select> */ ?>
           </div>
       </div>
 
@@ -132,7 +132,7 @@
 				<div class="col-md-12">
 					<div class="row" style="padding: 15px 0px 10px 0px;">
 						<div class="col-md-2 iitm-logo">
-            <a href="{{URL::asset('/')}}"><img src="{{URL::asset('siteimages/logo.png')}}" class="site_logo"></a>            
+            <a href="<?php echo URL::asset('/'); ?>"><img src="<?php echo URL::asset('siteimages/logo.png'); ?>" class="site_logo"></a>            
 							<!-- <img src="http://localhost/maths-iitm/siteimages/logo.png" class="site_logo"> -->
 						</div>
 						<div class="col-md-6 dept-name" style="padding: 10px 0px 0px 0px;">
@@ -222,7 +222,7 @@
 							<a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown"
 								aria-haspopup="true" aria-expanded="false">Research<b class="caret"></b></a>
 							<div class="dropdown-menu" aria-labelledby="dropdown04">
-								<a href="{{url('researchinfo')}}" class="dropdown-item">Research Areas</a>
+								<a href="<?php echo url('researchinfo'); ?>" class="dropdown-item">Research Areas</a>
 								<a href="#" class="dropdown-item">Publications</a>
 								<a href="#" class="dropdown-item">Books by Faculty</a>
 								<a href="#" class="dropdown-item">Awards and <br>Recognitions</a>
@@ -266,17 +266,17 @@
             <li>
             <ul id="userprofilelink" class="pull-right m-t">
                   <li style="" class="pull-right badge dpt-bg-light">
-                    @if(!Auth::check())
+                    <?php if(!Auth::check()): ?>
                       <a href="#" style="" class="pull-right" id="getlogin"><span class="">Login</span></a>
-                    @else
-                      <a href="{{url('logout')}}" class="topprofilelink pull-right"><span class="">Logout</span></a>
-                      @if(Auth::check())
-                          <a href="{{url('profile/'.Auth::user()->user_namehandle)}}" target="_blank" class="topprofilelink pull-right"><span class="">My Profile</span></a>
-                      @endif
-                      @if((Auth::user()->userprivileg->people==1) || (Auth::user()->userprivileg->student==1) || (Auth::user()->userprivileg->research==1)||(Auth::user()->userprivileg->programs==1)||(Auth::user()->userprivileg->events==1) || (Auth::user()->userprivileg->research==1) || (Auth::user()->userprivileg->newannouncement==1)|| (Auth::user()->userprivileg->createadmin==1))
-                        <a href="{{url('admin')}}" target="_blank" class="topprofilelink pull-right"><span class="">Admin Panel</span></a>
-                      @endif
-                    @endif
+                    <?php else: ?>
+                      <a href="<?php echo url('logout'); ?>" class="topprofilelink pull-right"><span class="">Logout</span></a>
+                      <?php if(Auth::check()): ?>
+                          <a href="<?php echo url('profile/'.Auth::user()->user_namehandle); ?>" target="_blank" class="topprofilelink pull-right"><span class="">My Profile</span></a>
+                      <?php endif; ?>
+                      <?php if((Auth::user()->userprivileg->people==1) || (Auth::user()->userprivileg->student==1) || (Auth::user()->userprivileg->research==1)||(Auth::user()->userprivileg->programs==1)||(Auth::user()->userprivileg->events==1) || (Auth::user()->userprivileg->research==1) || (Auth::user()->userprivileg->newannouncement==1)|| (Auth::user()->userprivileg->createadmin==1)): ?>
+                        <a href="<?php echo url('admin'); ?>" target="_blank" class="topprofilelink pull-right"><span class="">Admin Panel</span></a>
+                      <?php endif; ?>
+                    <?php endif; ?>
                   </li>
               </ul>
 
@@ -322,32 +322,32 @@
                       <?php
       $getallannouncements=News::orderBy('news_date','DESC')->where('news_publish','=','1')->where('news_archive','=','0')->where('news_type','=','2')->get();
       ?>
-      @if(count($getallannouncements))
-        @if(Request::url() != url('login'))
+      <?php if(count($getallannouncements)): ?>
+        <?php if(Request::url() != url('login')): ?>
           <div class="container m-t-lg">
             <div class="col-sm-12" id="marqueeContainer">
               <div class="col-sm-12">
                 <div id="marquee-author" class="marquee-author m-r font-bold"></div>       
               </div>        
               <ul id="marquee" class="col-sm-10">
-                @foreach($getallannouncements as $eachannouncement)                
+                <?php foreach($getallannouncements as $eachannouncement): ?>                
                   <li class="announcement">                     
-                    @if($eachannouncement->news_link!='')                   
-                    <a href="{{$eachannouncement->news_link}}" class="clear" target="_blank">  
-                      <strong class="author">{{$eachannouncement->news_title}}</strong>                
-                      <span class="block">{{$eachannouncement->news_description}}</span>
+                    <?php if($eachannouncement->news_link!=''): ?>                   
+                    <a href="<?php echo $eachannouncement->news_link; ?>" class="clear" target="_blank">  
+                      <strong class="author"><?php echo $eachannouncement->news_title; ?></strong>                
+                      <span class="block"><?php echo $eachannouncement->news_description; ?></span>
                     </a>
-                    @else
-                      <strong class="author">{{$eachannouncement->news_title}}</strong>                
-                      <span class="block">{{$eachannouncement->news_description}}</span>
-                    @endif
+                    <?php else: ?>
+                      <strong class="author"><?php echo $eachannouncement->news_title; ?></strong>                
+                      <span class="block"><?php echo $eachannouncement->news_description; ?></span>
+                    <?php endif; ?>
                   </li>             
-                @endforeach         
+                <?php endforeach; ?>         
               </ul>
             </div>
           </div>
-        @endif
-      @endif
+        <?php endif; ?>
+      <?php endif; ?>
 											<div class="ne-desc"><a href="/pages/newsDetails?wId=15"> MS/PhD Selected
 													Candidates
 													- July 2022</a></div>
@@ -561,7 +561,7 @@
 				</div>
 				<div class="col-md-5">
 					<div class="hod-image">
-						<img src="{{URL::asset('siteimages/homepage/Maths-HOD.png')}}" class="hod-img">
+						<img src="<?php echo URL::asset('siteimages/homepage/Maths-HOD.png'); ?>" class="hod-img">
 					</div>
 				</div>
 
@@ -660,7 +660,7 @@
 			</div>
 			<div class="row rearch-img">
 				<div class="col-md-4 research-col">
-					<img src="{{URL::asset('siteimages/homepage/RA1.png')}}" class="imags-1">
+					<img src="<?php echo URL::asset('siteimages/homepage/RA1.png'); ?>" class="imags-1">
 					<div class="centered">Algebra and Number Theory</div>
 					<div class="overlay-solid">
 						<div class="centered-text">Algebra and Number Theory</div>
@@ -668,7 +668,7 @@
 				</div>
 
 				<div class="col-md-4 research-col">
-					<img src="{{URL::asset('siteimages/homepage/RA2.png')}}" class="imags-1">
+					<img src="<?php echo URL::asset('siteimages/homepage/RA2.png'); ?>" class="imags-1">
 					<div class="centered">Analysis and Linear Algebra</div>
 					<div class="overlay-fluid">
 						<div class="centered-text">Analysis and Linear Algebra</div>
@@ -676,7 +676,7 @@
 				</div>
 
 				<div class="col-md-4 research-col">
-					<img src="{{URL::asset('siteimages/homepage/RA3.png')}}" class="imags-1">
+					<img src="<?php echo URL::asset('siteimages/homepage/RA3.png'); ?>" class="imags-1">
 					<div class="centered">Combinatorics and Theoretical Computer Science</div>
 					<div class="overlay-biomedical">
 						<div class="centered-text" style="padding: 0;">Combinatorics and Theoretical Computer Science</div>
@@ -684,7 +684,7 @@
 				</div>
 
         <div class="col-md-4 research-col">
-					<img src="{{URL::asset('siteimages/homepage/RA4.png')}}" class="imags-1">
+					<img src="<?php echo URL::asset('siteimages/homepage/RA4.png'); ?>" class="imags-1">
 					<div class="centered">Differential Equations and Applied Mathematics</div>
 					<div class="overlay-biomedical">
 						<div class="centered-text" style="padding: 0;">Differential Equations and Applied Mathematics</div>
@@ -692,7 +692,7 @@
 				</div>
 
         <div class="col-md-4 research-col">
-					<img src="{{URL::asset('siteimages/homepage/RA5.png')}}" class="imags-1">
+					<img src="<?php echo URL::asset('siteimages/homepage/RA5.png'); ?>" class="imags-1">
 					<div class="centered">Geometry and Topology</div>
 					<div class="overlay-biomedical">
 						<div class="centered-text" style="padding: 0;">Geometry and Topology</div>
@@ -700,7 +700,7 @@
 				</div>
 
         <div class="col-md-4 research-col">
-					<img src="{{URL::asset('siteimages/homepage/RA6.png')}}" class="imags-1">
+					<img src="<?php echo URL::asset('siteimages/homepage/RA6.png'); ?>" class="imags-1">
 					<div class="centered">Probability and Statistics</div>
 					<div class="overlay-biomedical">
 						<div class="centered-text" style="padding: 0;">Probability and Statistics</div>
@@ -933,12 +933,12 @@
 			<div class="row">
 				<div class="col-md-6">
 					<div class="iitm-footer-logo">
-						<img src="{{URL::asset('siteimages/homepage/footer/footer-logo2.png')}}" style="width: 60%;">
+						<img src="<?php echo URL::asset('siteimages/homepage/footer/footer-logo2.png'); ?>" style="width: 60%;">
 					</div>
 				</div>
 				<div class="col-md-6">
 					<div class="iitm-footer-logo">
-						<img src="{{URL::asset('siteimages/homepage/footer/footer-words.png')}}" style="width: 100%;">
+						<img src="<?php echo URL::asset('siteimages/homepage/footer/footer-words.png'); ?>" style="width: 100%;">
 					</div>
 				</div>
 			</div>
@@ -979,7 +979,7 @@
 
   
 
-    @section('modals')
+    <?php $__env->startSection('modals'); ?>
       <!-- Login Modal -->
       <div class="modal fade" id="LoginModal" tabindex="-1" role="dialog" aria-labelledby="LoginModal" aria-hidden="true">
         <div class="modal-dialog">
@@ -989,7 +989,7 @@
               <h4 class="modal-title" id="myModalLabel">Login</h4>
             </div>
             <div class="modal-body">
-                <form class="panel-body" id="userlogin" action="{{url('authenticate_user')}}">
+                <form class="panel-body" id="userlogin" action="<?php echo url('authenticate_user'); ?>">
                   <div class="form-group">
                     <label class="control-label">ADS Username/Email</label>
                     <input type="text" id="username" required placeholder="ADS Username or Email" class="form-control" name="username">
@@ -1003,7 +1003,7 @@
                       <input type="checkbox" name="remember"> Keep me logged in
                     </label>
                   </div>
-                  {{-- <a href="#" class="pull-right m-t-xs"><small>Forgot password?</small></a> --}}
+                  <?php /* <a href="#" class="pull-right m-t-xs"><small>Forgot password?</small></a> */ ?>
                   <button type="submit" class="btn dpt-bg-light">Sign in</button>
                   <p class="text-muted text-center"><small class="error">Email or Password mismatch</small></p>
                 </form>
@@ -1011,30 +1011,30 @@
           </div>
         </div>
       </div> 
-    @show  
+    <?php echo $__env->yieldSection(); ?>  
 
-    @section('qfooter-scripts')
-      <script type='text/javascript' src="{{URL::asset('js/bootstrap.min.js')}}"></script>
-      <script type='text/javascript' src="{{URL::asset('js/fuelux/fuelux.js')}}"></script>
-      <script type='text/javascript' src="{{URL::asset('js/typeahead.js')}}"></script>
-      <script type='text/javascript' src="{{URL::asset('js/hogan-2.0.0.js')}}"></script>
-      <script type='text/javascript' src="{{URL::asset('js/jquery.marquee.min.js')}}"></script>
-      <!-- <script type='text/javascript' src="{{URL::asset('lib/bootstrap-datepicker/js/bootstrap-datepicker.js')}}"></script> -->
-      <script type='text/javascript' src="{{URL::asset('lib/moment/min/moment.min.js')}}"></script>
-      <script type="text/javascript"n src="{{URL::asset('js/bootstrap-datetimepicker.min.js')}}"></script>
-      <script type='text/javascript' src="{{URL::asset('js/jquery.form.min.js')}}"></script>
-      <script src="{{ URL::asset('lib/bootbox/bootbox.js') }}"></script>
-      <script type='text/javascript' src="{{URL::asset('js/main.js')}}"></script>     
+    <?php $__env->startSection('qfooter-scripts'); ?>
+      <script type='text/javascript' src="<?php echo URL::asset('js/bootstrap.min.js'); ?>"></script>
+      <script type='text/javascript' src="<?php echo URL::asset('js/fuelux/fuelux.js'); ?>"></script>
+      <script type='text/javascript' src="<?php echo URL::asset('js/typeahead.js'); ?>"></script>
+      <script type='text/javascript' src="<?php echo URL::asset('js/hogan-2.0.0.js'); ?>"></script>
+      <script type='text/javascript' src="<?php echo URL::asset('js/jquery.marquee.min.js'); ?>"></script>
+      <!-- <script type='text/javascript' src="<?php echo URL::asset('lib/bootstrap-datepicker/js/bootstrap-datepicker.js'); ?>"></script> -->
+      <script type='text/javascript' src="<?php echo URL::asset('lib/moment/min/moment.min.js'); ?>"></script>
+      <script type="text/javascript"n src="<?php echo URL::asset('js/bootstrap-datetimepicker.min.js'); ?>"></script>
+      <script type='text/javascript' src="<?php echo URL::asset('js/jquery.form.min.js'); ?>"></script>
+      <script src="<?php echo URL::asset('lib/bootbox/bootbox.js'); ?>"></script>
+      <script type='text/javascript' src="<?php echo URL::asset('js/main.js'); ?>"></script>     
       <!-- skillskapes - JS -->
-      <script type='text/javascript' src="{{URL::asset('js/skillskapes.js')}}"></script> 
+      <script type='text/javascript' src="<?php echo URL::asset('js/skillskapes.js'); ?>"></script> 
 
-    @show
+    <?php echo $__env->yieldSection(); ?>
 
 
 
     <script type='text/javascript'>      
-      var grouppath="{{URL::asset('data/researchgruop.json')}}"; 
-      var globalPath="{{url('/')}}";
+      var grouppath="<?php echo URL::asset('data/researchgruop.json'); ?>"; 
+      var globalPath="<?php echo url('/'); ?>";
       console.log(grouppath);
       
       var use_debug = false;
@@ -1143,8 +1143,8 @@
         "HTML-CSS": { availableFonts: ["TeX"] }
       });
     </script>
-    @section('footer-scripts')
-    @show
+    <?php $__env->startSection('footer-scripts'); ?>
+    <?php echo $__env->yieldSection(); ?>
    
 
   </body>
